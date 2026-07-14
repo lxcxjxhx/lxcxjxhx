@@ -7,10 +7,10 @@
 
 Building [**HOS-LS**](https://github.com/lxcxjxhx/HOS-LS) — an AI-native security execution platform with 7-agent pipeline, semantic code analysis, and automated exploit validation.
 
-![927 commits/year](https://img.shields.io/badge/927_commits%2Fyear-A85D5D?style=flat-square&logo=github&logoColor=A85D5D&color=1a1625)
-![1467 articles](https://img.shields.io/badge/1,467_articles-9B7CB6?style=flat-square&logo=bookstack&logoColor=9B7CB6&color=1a1625)
-![14 repos](https://img.shields.io/badge/14_repositories-5A7A6A?style=flat-square&logo=git&logoColor=5A7A6A&color=1a1625)
-![7 PyPI packages](https://img.shields.io/badge/7_PyPI_packages-4A9B4A?style=flat-square&logo=python&logoColor=4A9B4A&color=1a1625)
+![Merged PRs](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/lxcxjxhx/lxcxjxhx/main/stats/prs.json)
+![Repositories](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/lxcxjxhx/lxcxjxhx/main/stats/repos.json)
+![Total Stars](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/lxcxjxhx/lxcxjxhx/main/stats/stars.json)
+![Followers](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/lxcxjxhx/lxcxjxhx/main/stats/followers.json)
 [![CSDN](https://img.shields.io/badge/CSDN-Expert_Blogger-8B7355?style=flat-square&logo=csdn&color=1a1625)](https://blog.csdn.net/)
 
 #### 🎯 Currently
