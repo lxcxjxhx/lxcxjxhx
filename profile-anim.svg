@@ -2,124 +2,188 @@
   <defs>
     <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <filter id="glow2"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#00ff88" stop-opacity="0"/><stop offset="50%" stop-color="#00ff88" stop-opacity="0.6"/><stop offset="100%" stop-color="#00ff88" stop-opacity="0"/></linearGradient>
-    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(0,255,136,0.04)" stroke-width="0.5"/></pattern>
-    <clipPath id="clip"><rect width="480" height="220" rx="10"/></clipPath>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- 主题色：血红铁灰 ↔ 风信子紫绿 -->
+    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9B7CB6" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#9B7CB6" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#9B7CB6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1625"/>
+      <stop offset="100%" stop-color="#2A3A4A"/>
+    </linearGradient>
+    <linearGradient id="flowerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A85D5D"/>
+      <stop offset="35%" stop-color="#9B7CB6"/>
+      <stop offset="100%" stop-color="#4A9B4A"/>
+    </linearGradient>
+    <radialGradient id="petalGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B8A4D0"/>
+      <stop offset="100%" stop-color="#6B4E7C"/>
+    </radialGradient>
+    <linearGradient id="petalCopper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C87D7D"/>
+      <stop offset="100%" stop-color="#8B3A3A"/>
+    </linearGradient>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="rgba(155,124,182,0.06)" stroke-width="0.5"/>
+    </pattern>
+    <clipPath id="clip"><rect width="480" height="220" rx="12"/></clipPath>
+    <!-- 风信子六瓣花装饰 -->
+    <g id="hyacinthPetal">
+      <path d="M0,-12 C6,-12 12,-6 12,0 C12,6 6,12 0,12 C-6,12 -12,6 -12,0 C-12,-6 -6,-12 0,-12Z" stroke="rgba(155,124,182,0.3)" stroke-width="1"/>
+    </g>
   </defs>
   <g clip-path="url(#clip)">
-    <rect width="480" height="220" fill="#0a0e14" rx="10"/>
+    <rect width="480" height="220" fill="url(#bgGrad)" rx="12"/>
     <rect width="480" height="220" fill="url(#grid)"/>
-    <!-- scan lines (animated, degraded invisible on GitHub) -->
-    <g opacity="0.03"><line x1="0" y1="0" x2="480" y2="0" stroke="#fff" stroke-width="1"><animate attributeName="y1" values="0;220" dur="8s" repeatCount="indefinite"/><animate attributeName="y2" values="0;220" dur="8s" repeatCount="indefinite"/></line></g>
+    <!-- subtle noise overlay -->
+    <rect width="480" height="220" fill="rgba(255,255,255,0.015)"/>
+    <!-- scan lines -->
+    <g opacity="0.02">
+      <line x1="0" y1="0" x2="480" y2="0" stroke="#fff" stroke-width="1">
+        <animate attributeName="y1" values="0;220" dur="8s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="0;220" dur="8s" repeatCount="indefinite"/>
+      </line>
+    </g>
+    <!-- 左下角花瓣装饰 -->
+    <g transform="translate(32, 188) scale(0.4)" opacity="0.15">
+      <use href="#hyacinthPetal" x="-24" y="0" fill="url(#petalGrad)"/>
+      <use href="#hyacinthPetal" x="0" y="-24" fill="url(#flowerGrad)" transform="rotate(60)"/>
+      <use href="#hyacinthPetal" x="24" y="0" fill="url(#petalCopper)" transform="rotate(120)"/>
+      <use href="#hyacinthPetal" x="24" y="0" fill="url(#petalGrad)" transform="rotate(180)"/>
+      <use href="#hyacinthPetal" x="0" y="24" fill="url(#flowerGrad)" transform="rotate(240)"/>
+      <use href="#hyacinthPetal" x="-24" y="0" fill="url(#petalCopper)" transform="rotate(300)"/>
+    </g>
+    <!-- 右上角花瓣装饰 -->
+    <g transform="translate(448, 32) scale(0.3)" opacity="0.12">
+      <use href="#hyacinthPetal" x="-24" y="0" fill="url(#petalGrad)"/>
+      <use href="#hyacinthPetal" x="0" y="-24" fill="url(#flowerGrad)" transform="rotate(60)"/>
+      <use href="#hyacinthPetal" x="24" y="0" fill="url(#petalCopper)" transform="rotate(120)"/>
+    </g>
 
     <!-- ==================== SLIDE 1: IDENTITY (always visible) ==================== -->
     <g>
-      <!-- HOS logo -->
-      <text x="240" y="62" text-anchor="middle" font-family="'Courier New',monospace" font-size="42" font-weight="bold" fill="#00ff88" filter="url(#glow2)">HOS</text>
-      <text x="240" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#7aa2f7" letter-spacing="3">HYACINTH OF SECURITY</text>
+      <!-- HOS logo with double color gradient -->
+      <text x="240" y="62" text-anchor="middle" font-family="'Courier New',monospace" font-size="42" font-weight="bold" fill="url(#flowerGrad)" filter="url(#glow2)">HOS</text>
+      <text x="240" y="88" text-anchor="middle" font-family="system-ui,sans-serif" font-size="13" fill="#9B7CB6" letter-spacing="3">HYACINTH OF SECURITY</text>
       <rect x="140" y="102" width="200" height="1" fill="url(#lineGrad)"/>
-      <text x="240" y="130" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#c9d1d9">AI x Cybersecurity Practitioner</text>
-      <text x="240" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8b949e">Qian Jiahong · Shanghai, China</text>
-      <!-- blink cursor (animated, degraded to static on GitHub) -->
-      <rect x="340" y="148" width="8" height="14" fill="#00ff88" opacity="0.5"><animate attributeName="opacity" values="0.8;0;0.8" dur="1.2s" repeatCount="indefinite"/></rect>
+      <text x="240" y="130" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#e0e0e0">AI x Cybersecurity Practitioner</text>
+      <text x="240" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#888888">Qian Jiahong · Shanghai, China</text>
+      <!-- blink cursor -->
+      <rect x="340" y="148" width="8" height="14" fill="#A85D5D" opacity="0.5">
+        <animate attributeName="opacity" values="0.8;0;0.8" dur="1.2s" repeatCount="indefinite"/>
+      </rect>
       <!-- shield icon -->
-      <g transform="translate(240,188)" stroke="#00ff88" stroke-width="1.2" fill="none" opacity="0.25">
+      <g transform="translate(240,188)" stroke="#4A9B4A" stroke-width="1.2" fill="none" opacity="0.25">
         <path d="M0,-10 L8,-6 L8,2 Q8,8 0,12 Q-8,8 -8,2 L-8,-6 Z"/>
       </g>
-      <!-- slide animation: fade out after 3.5s (browsers only, GitHub ignores) -->
+      <!-- animation -->
       <animate attributeName="opacity" values="1;1;0;0;0;0;0;0" keyTimes="0;0.219;0.25;0.469;0.5;0.719;0.75;1" dur="16s" repeatCount="indefinite"/>
     </g>
 
     <!-- ==================== SLIDE 2: IMPACT (hidden on GitHub) ==================== -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0;0;0;0" keyTimes="0;0.219;0.25;0.469;0.5;0.719;0.75;1" dur="16s" repeatCount="indefinite"/>
-      <text x="240" y="40" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#00ff88" letter-spacing="4" filter="url(#glow)">IMPACT</text>
+      <text x="240" y="40" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#9B7CB6" letter-spacing="4" filter="url(#glow)">IMPACT</text>
       <rect x="180" y="50" width="120" height="1" fill="url(#lineGrad)"/>
       <g text-anchor="middle">
-        <text x="80" y="100" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="#00ff88" filter="url(#glow)">927</text>
-        <text x="80" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#8b949e">commits / year</text>
-        <rect x="55" y="130" width="50" height="2" fill="#00ff88" opacity="0.2" rx="1"/>
+        <text x="80" y="100" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="#A85D5D" filter="url(#glow)">927</text>
+        <text x="80" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#888888">commits / year</text>
+        <rect x="55" y="130" width="50" height="2" fill="#A85D5D" opacity="0.2" rx="1"/>
       </g>
       <g text-anchor="middle">
-        <text x="185" y="100" font-family="'Courier New',monospace" font-size="28" font-weight="bold" fill="#7aa2f7" filter="url(#glow)">1,467</text>
-        <text x="185" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#8b949e">original articles</text>
-        <rect x="160" y="130" width="50" height="2" fill="#7aa2f7" opacity="0.2" rx="1"/>
+        <text x="185" y="100" font-family="'Courier New',monospace" font-size="28" font-weight="bold" fill="#9B7CB6" filter="url(#glow)">1,467</text>
+        <text x="185" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#888888">original articles</text>
+        <rect x="160" y="130" width="50" height="2" fill="#9B7CB6" opacity="0.2" rx="1"/>
       </g>
       <g text-anchor="middle">
-        <text x="290" y="100" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="#bb9af7" filter="url(#glow)">11</text>
-        <text x="290" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#8b949e">merged PRs</text>
-        <rect x="265" y="130" width="50" height="2" fill="#bb9af7" opacity="0.2" rx="1"/>
+        <text x="290" y="100" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="#5A7A6A" filter="url(#glow)">14</text>
+        <text x="290" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#888888">repositories</text>
+        <rect x="265" y="130" width="50" height="2" fill="#5A7A6A" opacity="0.2" rx="1"/>
       </g>
       <g text-anchor="middle">
-        <text x="400" y="100" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="#e0af68" filter="url(#glow)">7</text>
-        <text x="400" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#8b949e">PyPI packages</text>
-        <rect x="375" y="130" width="50" height="2" fill="#e0af68" opacity="0.2" rx="1"/>
+        <text x="400" y="100" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="#4A9B4A" filter="url(#glow)">7</text>
+        <text x="400" y="120" font-family="system-ui,sans-serif" font-size="10" fill="#888888">PyPI packages</text>
+        <rect x="375" y="130" width="50" height="2" fill="#4A9B4A" opacity="0.2" rx="1"/>
       </g>
-      <text x="240" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#484f58">Open source · CSDN expert blogger · Intel AI competition</text>
-      <text x="240" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#e0af68" opacity="0.7">China-US Youth Maker Grand Prize</text>
+      <text x="240" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#666666">Open source · CSDN expert blogger · Intel AI competition</text>
+      <text x="240" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8B7355" opacity="0.8">China-US Youth Maker Grand Prize</text>
     </g>
 
     <!-- ==================== SLIDE 3: FOCUS (hidden on GitHub) ==================== -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;0;0;1;1;0;0" keyTimes="0;0.219;0.25;0.469;0.5;0.719;0.75;1" dur="16s" repeatCount="indefinite"/>
-      <text x="240" y="40" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#00ff88" letter-spacing="4" filter="url(#glow)">WHAT I BUILD</text>
+      <text x="240" y="40" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#9B7CB6" letter-spacing="4" filter="url(#glow)">WHAT I BUILD</text>
       <rect x="160" y="50" width="160" height="1" fill="url(#lineGrad)"/>
       <g>
-        <rect x="30" y="65" width="420" height="36" rx="4" fill="rgba(0,255,136,0.05)" stroke="rgba(0,255,136,0.15)" stroke-width="0.5"/>
-        <text x="48" y="80" font-family="'Courier New',monospace" font-size="9" fill="#00ff88">01</text>
-        <text x="68" y="80" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#c9d1d9">HOS-LS</text>
-        <text x="68" y="93" font-family="system-ui,sans-serif" font-size="9" fill="#8b949e">AI-native security platform · 7-agent pipeline · &lt;5% false positive</text>
-        <rect x="370" y="73" width="65" height="16" rx="8" fill="rgba(0,255,136,0.12)"/><text x="402" y="84" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#00ff88">Flagship</text>
+        <rect x="30" y="65" width="420" height="36" rx="4" fill="rgba(168,93,93,0.08)" stroke="rgba(168,93,93,0.25)" stroke-width="0.5" filter="url(#softGlow)"/>
+        <text x="48" y="80" font-family="'Courier New',monospace" font-size="9" fill="#A85D5D">01</text>
+        <text x="68" y="80" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#e0e0e0">HOS-LS</text>
+        <text x="68" y="93" font-family="system-ui,sans-serif" font-size="9" fill="#888888">AI-native security platform · 7-agent pipeline · &lt;5% false positive</text>
+        <rect x="370" y="73" width="65" height="16" rx="8" fill="rgba(168,93,93,0.15)"/><text x="402" y="84" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#A85D5D">Flagship</text>
       </g>
       <g>
-        <rect x="30" y="110" width="420" height="36" rx="4" fill="rgba(122,162,247,0.05)" stroke="rgba(122,162,247,0.15)" stroke-width="0.5"/>
-        <text x="48" y="125" font-family="'Courier New',monospace" font-size="9" fill="#7aa2f7">02</text>
-        <text x="68" y="125" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#c9d1d9">Multi-Agent Systems</text>
-        <text x="68" y="138" font-family="system-ui,sans-serif" font-size="9" fill="#8b949e">LLM orchestration · RAG pipelines · Prompt engineering</text>
+        <rect x="30" y="110" width="420" height="36" rx="4" fill="rgba(155,124,182,0.08)" stroke="rgba(155,124,182,0.25)" stroke-width="0.5" filter="url(#softGlow)"/>
+        <text x="48" y="125" font-family="'Courier New',monospace" font-size="9" fill="#9B7CB6">02</text>
+        <text x="68" y="125" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#e0e0e0">Multi-Agent Systems</text>
+        <text x="68" y="138" font-family="system-ui,sans-serif" font-size="9" fill="#888888">LLM orchestration · RAG pipelines · Prompt engineering</text>
       </g>
       <g>
-        <rect x="30" y="155" width="420" height="36" rx="4" fill="rgba(187,154,247,0.05)" stroke="rgba(187,154,247,0.15)" stroke-width="0.5"/>
-        <text x="48" y="170" font-family="'Courier New',monospace" font-size="9" fill="#bb9af7">03</text>
-        <text x="68" y="170" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#c9d1d9">Security Research</text>
-        <text x="68" y="183" font-family="system-ui,sans-serif" font-size="9" fill="#8b949e">CTF (national level) · AI red team · Exploit development</text>
+        <rect x="30" y="155" width="420" height="36" rx="4" fill="rgba(74,155,74,0.08)" stroke="rgba(74,155,74,0.25)" stroke-width="0.5" filter="url(#softGlow)"/>
+        <text x="48" y="170" font-family="'Courier New',monospace" font-size="9" fill="#4A9B4A">03</text>
+        <text x="68" y="170" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#e0e0e0">Security Research</text>
+        <text x="68" y="183" font-family="system-ui,sans-serif" font-size="9" fill="#888888">CTF (national level) · AI red team · Exploit development</text>
       </g>
     </g>
 
     <!-- ==================== SLIDE 4: CONNECT (hidden on GitHub) ==================== -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;0;0;0;0;1;1;0" keyTimes="0;0.219;0.25;0.469;0.5;0.719;0.75;0.969;1" dur="16s" repeatCount="indefinite"/>
-      <text x="240" y="40" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#00ff88" letter-spacing="4" filter="url(#glow)">CONNECT</text>
+      <text x="240" y="40" text-anchor="middle" font-family="'Courier New',monospace" font-size="11" fill="#9B7CB6" letter-spacing="4" filter="url(#glow)">CONNECT</text>
       <rect x="180" y="50" width="120" height="1" fill="url(#lineGrad)"/>
-      <text x="240" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#484f58" letter-spacing="2">TECH STACK</text>
-      <rect x="50" y="90" width="52" height="20" rx="10" fill="rgba(0,255,136,0.1)" stroke="rgba(0,255,136,0.25)" stroke-width="0.5"/>
-      <text x="76" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#00ff88">Python</text>
-      <rect x="112" y="90" width="58" height="20" rx="10" fill="rgba(122,162,247,0.1)" stroke="rgba(122,162,247,0.25)" stroke-width="0.5"/>
-      <text x="141" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#7aa2f7">PyTorch</text>
-      <rect x="180" y="90" width="36" height="20" rx="10" fill="rgba(187,154,247,0.1)" stroke="rgba(187,154,247,0.25)" stroke-width="0.5"/>
-      <text x="198" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#bb9af7">LLM</text>
-      <rect x="226" y="90" width="58" height="20" rx="10" fill="rgba(224,175,104,0.1)" stroke="rgba(224,175,104,0.25)" stroke-width="0.5"/>
-      <text x="255" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e0af68">FastAPI</text>
-      <rect x="294" y="90" width="50" height="20" rx="10" fill="rgba(0,255,136,0.1)" stroke="rgba(0,255,136,0.25)" stroke-width="0.5"/>
-      <text x="319" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#00ff88">React</text>
-      <rect x="354" y="90" width="62" height="20" rx="10" fill="rgba(122,162,247,0.1)" stroke="rgba(122,162,247,0.25)" stroke-width="0.5"/>
-      <text x="385" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#7aa2f7">Docker</text>
-      <rect x="85" y="118" width="44" height="20" rx="10" fill="rgba(187,154,247,0.1)" stroke="rgba(187,154,247,0.25)" stroke-width="0.5"/>
-      <text x="107" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#bb9af7">RAG</text>
-      <rect x="139" y="118" width="56" height="20" rx="10" fill="rgba(0,255,136,0.1)" stroke="rgba(0,255,136,0.25)" stroke-width="0.5"/>
-      <text x="167" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#00ff88">vLLM</text>
-      <rect x="205" y="118" width="76" height="20" rx="10" fill="rgba(122,162,247,0.1)" stroke="rgba(122,162,247,0.25)" stroke-width="0.5"/>
-      <text x="243" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#7aa2f7">LangGraph</text>
-      <rect x="291" y="118" width="68" height="20" rx="10" fill="rgba(224,175,104,0.1)" stroke="rgba(224,175,104,0.25)" stroke-width="0.5"/>
-      <text x="325" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#e0af68">Neo4j</text>
-      <text x="240" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#484f58" letter-spacing="2">REACH ME</text>
-      <text x="240" y="192" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#c9d1d9">aqfxz_zh@qq.com</text>
-      <text x="240" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8b949e">CSDN: Security Hyacinth · 1467 articles · 12+ columns</text>
+      <text x="240" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#666666" letter-spacing="2">TECH STACK</text>
+
+      <!-- First row -->
+      <rect x="40" y="90" width="56" height="20" rx="10" fill="rgba(168,93,93,0.12)" stroke="rgba(168,93,93,0.28)" stroke-width="0.5"/>
+      <text x="68" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#A85D5D">Python</text>
+      <rect x="102" y="90" width="58" height="20" rx="10" fill="rgba(155,124,182,0.12)" stroke="rgba(155,124,182,0.28)" stroke-width="0.5"/>
+      <text x="131" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#9B7CB6">PyTorch</text>
+      <rect x="166" y="90" width="40" height="20" rx="10" fill="rgba(90,122,106,0.12)" stroke="rgba(90,122,106,0.28)" stroke-width="0.5"/>
+      <text x="186" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5A7A6A">LLM</text>
+      <rect x="212" y="90" width="62" height="20" rx="10" fill="rgba(139,115,85,0.12)" stroke="rgba(139,115,85,0.28)" stroke-width="0.5"/>
+      <text x="243" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8B7355">FastAPI</text>
+      <rect x="280" y="90" width="52" height="20" rx="10" fill="rgba(74,155,74,0.12)" stroke="rgba(74,155,74,0.28)" stroke-width="0.5"/>
+      <text x="306" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#4A9B4A">React</text>
+      <rect x="338" y="90" width="64" height="20" rx="10" fill="rgba(168,93,93,0.12)" stroke="rgba(168,93,93,0.28)" stroke-width="0.5"/>
+      <text x="370" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#A85D5D">Docker</text>
+
+      <!-- Second row -->
+      <rect x="40" y="118" width="60" height="20" rx="10" fill="rgba(155,124,182,0.12)" stroke="rgba(155,124,182,0.28)" stroke-width="0.5"/>
+      <text x="70" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#9B7CB6">QLoRA</text>
+      <rect x="106" y="118" width="48" height="20" rx="10" fill="rgba(90,122,106,0.12)" stroke="rgba(90,122,106,0.28)" stroke-width="0.5"/>
+      <text x="130" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5A7A6A">RAG</text>
+      <rect x="160" y="118" width="54" height="20" rx="10" fill="rgba(74,155,74,0.12)" stroke="rgba(74,155,74,0.28)" stroke-width="0.5"/>
+      <text x="187" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#4A9B4A">vLLM</text>
+      <rect x="220" y="118" width="74" height="20" rx="10" fill="rgba(155,124,182,0.12)" stroke="rgba(155,124,182,0.28)" stroke-width="0.5"/>
+      <text x="257" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#9B7CB6">LangGraph</text>
+      <rect x="300" y="118" width="66" height="20" rx="10" fill="rgba(139,115,85,0.12)" stroke="rgba(139,115,85,0.28)" stroke-width="0.5"/>
+      <text x="333" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8B7355">Neo4j</text>
+      <rect x="372" y="118" width="68" height="20" rx="10" fill="rgba(90,122,106,0.12)" stroke="rgba(90,122,106,0.28)" stroke-width="0.5"/>
+      <text x="406" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5A7A6A">Tree-sitter</text>
+
+      <text x="240" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#666666" letter-spacing="2">REACH ME</text>
+      <text x="240" y="192" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#e0e0e0">aqfxz_zh@qq.com</text>
+      <text x="240" y="210" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#888888">CSDN: Security Hyacinth · 1467 articles · 12+ columns</text>
     </g>
 
     <!-- corner decoration (always visible) -->
-    <path d="M0,10 Q0,0 10,0" fill="none" stroke="#00ff88" stroke-width="0.8" opacity="0.3"/>
-    <path d="M480,10 Q480,0 470,0" fill="none" stroke="#00ff88" stroke-width="0.8" opacity="0.3"/>
-    <path d="M0,210 Q0,220 10,220" fill="none" stroke="#00ff88" stroke-width="0.8" opacity="0.3"/>
-    <path d="M480,210 Q480,220 470,220" fill="none" stroke="#00ff88" stroke-width="0.8" opacity="0.3"/>
+    <path d="M0,10 Q0,0 10,0" fill="none" stroke="url(#flowerGrad)" stroke-width="0.8" opacity="0.4"/>
+    <path d="M480,10 Q480,0 470,0" fill="none" stroke="url(#flowerGrad)" stroke-width="0.8" opacity="0.4"/>
+    <path d="M0,210 Q0,220 10,220" fill="none" stroke="url(#flowerGrad)" stroke-width="0.8" opacity="0.4"/>
+    <path d="M480,210 Q480,220 470,220" fill="none" stroke="url(#flowerGrad)" stroke-width="0.8" opacity="0.4"/>
   </g>
 </svg>
