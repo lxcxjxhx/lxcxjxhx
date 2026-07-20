@@ -56,10 +56,10 @@ jobs:
           FOLLOWERS=$(jq -r '.message' stats/followers.json)
 
           export PRS REPOS STARS FOLLOWERS
-          perl -i -pe 's/(<text id="stat-prs"[^>]*>)[^<]*(<\/text>)/$1$ENV{PRS}$2/' profile-anim.svg
-          perl -i -pe 's/(<text id="stat-repos"[^>]*>)[^<]*(<\/text>)/$1$ENV{REPOS}$2/' profile-anim.svg
-          perl -i -pe 's/(<text id="stat-stars"[^>]*>)[^<]*(<\/text>)/$1$ENV{STARS}$2/' profile-anim.svg
-          perl -i -pe 's/(<text id="stat-followers"[^>]*>)[^<]*(<\/text>)/$1$ENV{FOLLOWERS}$2/' profile-anim.svg
+          perl -i -pe 's/(<tspan id="stat-prs"[^>]*>)[^<]*(<\/tspan>)/$1$ENV{PRS}$2/' profile-anim.svg
+          perl -i -pe 's/(<tspan id="stat-repos"[^>]*>)[^<]*(<\/tspan>)/$1$ENV{REPOS}$2/' profile-anim.svg
+          perl -i -pe 's/(<tspan id="stat-stars"[^>]*>)[^<]*(<\/tspan>)/$1$ENV{STARS}$2/' profile-anim.svg
+          perl -i -pe 's/(<tspan id="stat-followers"[^>]*>)[^<]*(<\/tspan>)/$1$ENV{FOLLOWERS}$2/' profile-anim.svg
 
       - name: Commit and push
         run: |

@@ -1,54 +1,38 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" width="800" height="220">
   <defs>
-    <!-- ===== FILTERS ===== -->
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="glow-strong">
-      <feGaussianBlur stdDeviation="6" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="bokeh-blur">
-      <feGaussianBlur stdDeviation="12"/>
-    </filter>
-    <filter id="softGlow">
-      <feGaussianBlur stdDeviation="2" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <!-- 发光滤镜 -->
+    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow-strong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="bokeh-blur"><feGaussianBlur stdDeviation="16"/></filter>
+    <filter id="bokeh-sm"><feGaussianBlur stdDeviation="8"/></filter>
+    <filter id="inner-shadow"><feOffset dx="0" dy="1"/><feGaussianBlur stdDeviation="2"/><feComposite operator="out" in="SourceGraphic"/><feComponentTransfer><feFuncA type="linear" slope="0.3"/></feComponentTransfer><feBlend in="SourceGraphic" mode="overlay"/></filter>
 
-    <!-- ===== GRADIENTS: 霓虹釉面风信子色板 ===== -->
-    <radialGradient id="bgGrad" cx="50%" cy="45%" r="65%">
+    <!-- 色板 -->
+    <radialGradient id="bgGrad" cx="50%" cy="40%" r="75%">
       <stop offset="0%" stop-color="#1E1F1D"/>
-      <stop offset="55%" stop-color="#141514"/>
-      <stop offset="100%" stop-color="#0A0A09"/>
+      <stop offset="45%" stop-color="#141514"/>
+      <stop offset="100%" stop-color="#080808"/>
     </radialGradient>
-
     <linearGradient id="petalPurple" x1="0" y1="0" x2="0.5" y2="1">
-      <stop offset="0%" stop-color="#B49BC4"/>
-      <stop offset="40%" stop-color="#8C6E9F"/>
-      <stop offset="100%" stop-color="#2D1A36"/>
+      <stop offset="0%" stop-color="#B49BC4"/><stop offset="40%" stop-color="#8C6E9F"/><stop offset="100%" stop-color="#2D1A36"/>
     </linearGradient>
     <linearGradient id="petalCrimson" x1="0" y1="0" x2="0.5" y2="1">
-      <stop offset="0%" stop-color="#B33F4E"/>
-      <stop offset="45%" stop-color="#862C3B"/>
-      <stop offset="100%" stop-color="#392A40"/>
-    </linearGradient>
-    <linearGradient id="stemGreen" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#3b7a28"/>
-      <stop offset="50%" stop-color="#6CCB4C"/>
-      <stop offset="100%" stop-color="#3b7a28"/>
-    </linearGradient>
-    <linearGradient id="sepGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#862C3B" stop-opacity="0"/>
-      <stop offset="30%" stop-color="#8C6E9F" stop-opacity="0.6"/>
-      <stop offset="70%" stop-color="#862C3B" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#862C3B" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#B33F4E"/><stop offset="45%" stop-color="#862C3B"/><stop offset="100%" stop-color="#392A40"/>
     </linearGradient>
     <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#B49BC4"/>
-      <stop offset="50%" stop-color="#8C6E9F"/>
-      <stop offset="100%" stop-color="#B33F4E"/>
+      <stop offset="0%" stop-color="#B49BC4"/><stop offset="50%" stop-color="#8C6E9F"/><stop offset="100%" stop-color="#B33F4E"/>
+    </linearGradient>
+    <linearGradient id="sepGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#862C3B" stop-opacity="0"/><stop offset="50%" stop-color="#8C6E9F" stop-opacity="0.4"/><stop offset="100%" stop-color="#862C3B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(140,110,159,0.06)"/><stop offset="100%" stop-color="rgba(45,26,54,0.12)"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(134,44,59,0.05)"/><stop offset="100%" stop-color="rgba(57,42,64,0.1)"/>
+    </linearGradient>
+    <linearGradient id="cardGrad3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(108,203,76,0.04)"/><stop offset="100%" stop-color="rgba(30,31,29,0.08)"/>
     </linearGradient>
     <radialGradient id="numRed" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#B33F4E"/><stop offset="100%" stop-color="#862C3B"/>
@@ -63,21 +47,21 @@
       <stop offset="0%" stop-color="#C9A96E"/><stop offset="100%" stop-color="#8B6D3F"/>
     </radialGradient>
     <radialGradient id="bokeh1">
-      <stop offset="0%" stop-color="#8C6E9F" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#8C6E9F" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#8C6E9F" stop-opacity="0.18"/><stop offset="100%" stop-color="#8C6E9F" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="bokeh2">
-      <stop offset="0%" stop-color="#862C3B" stop-opacity="0.12"/>
-      <stop offset="100%" stop-color="#862C3B" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#862C3B" stop-opacity="0.14"/><stop offset="100%" stop-color="#862C3B" stop-opacity="0"/>
     </radialGradient>
     <radialGradient id="bokeh3">
-      <stop offset="0%" stop-color="#6CCB4C" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#6CCB4C" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#6CCB4C" stop-opacity="0.1"/><stop offset="100%" stop-color="#6CCB4C" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bokehGold">
+      <stop offset="0%" stop-color="#C9A96E" stop-opacity="0.08"/><stop offset="100%" stop-color="#C9A96E" stop-opacity="0"/>
     </radialGradient>
 
-    <clipPath id="clip"><rect width="800" height="200" rx="12"/></clipPath>
+    <clipPath id="clip"><rect width="800" height="220" rx="12"/></clipPath>
 
-    <!-- 风信子花瓣几何 -->
+    <!-- 风信子花瓣 -->
     <path id="floret" d="M0,-18 C4,-18 8,-12 9,-4 C10,2 6,8 0,12 C-6,8 -10,2 -9,-4 C-8,-12 -4,-18 0,-18Z"/>
     <g id="floretCluster">
       <use href="#floret" fill="url(#petalPurple)" opacity="0.9"/>
@@ -87,170 +71,279 @@
       <use href="#floret" fill="url(#petalPurple)" opacity="0.9" transform="rotate(240)"/>
       <use href="#floret" fill="url(#petalCrimson)" opacity="0.85" transform="rotate(300)"/>
     </g>
+
+    <!-- 奖牌形状 -->
+    <g id="medal">
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#C9A96E" stroke-width="0.6" opacity="0.6"/>
+      <circle cx="0" cy="0" r="5" fill="url(#numGold)" opacity="0.3"/>
+      <path d="M0,-3 L1.5,0 L0,3 L-1.5,0Z" fill="#C9A96E" opacity="0.5"/>
+    </g>
   </defs>
 
   <g clip-path="url(#clip)">
-    <!-- ===== 全局背景 (所有 slide 共享) ===== -->
-    <rect width="800" height="200" fill="url(#bgGrad)" rx="12"/>
+    <!-- ===== 背景层 ===== -->
+    <rect width="800" height="220" fill="url(#bgGrad)" rx="12"/>
 
-    <!-- 散景光斑 -->
-    <circle cx="130" cy="50" r="55" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
-      <animate attributeName="cx" values="130;160;100;130" dur="20s" repeatCount="indefinite"/>
+    <!-- 大面积散景 (10个，全方向漂移) -->
+    <circle cx="100" cy="60" r="80" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="100;200;50;120;100" dur="18s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="60;30;90;50;60" dur="14s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="680" cy="155" r="60" fill="url(#bokeh2)" filter="url(#bokeh-blur)">
-      <animate attributeName="cx" values="680;650;710;680" dur="25s" repeatCount="indefinite"/>
+    <circle cx="700" cy="170" r="90" fill="url(#bokeh2)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="700;600;750;650;700" dur="20s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="170;140;190;160;170" dur="16s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="400" cy="25" r="35" fill="url(#bokeh3)" filter="url(#bokeh-blur)">
-      <animate attributeName="cy" values="25;45;15;25" dur="18s" repeatCount="indefinite"/>
+    <circle cx="400" cy="30" r="55" fill="url(#bokeh3)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="400;480;340;420;400" dur="17s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="30;50;20;40;30" dur="12s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="55;70;45;60;55" dur="11s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="55" cy="165" r="40" fill="url(#bokeh2)" filter="url(#bokeh-blur)"/>
-    <circle cx="750" cy="45" r="30" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
-      <animate attributeName="cx" values="750;730;760;750" dur="22s" repeatCount="indefinite"/>
+    <circle cx="780" cy="40" r="40" fill="url(#bokeh1)" filter="url(#bokeh-sm)">
+      <animate attributeName="cy" values="40;80;20;60;40" dur="13s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="50" cy="180" r="60" fill="url(#bokeh2)" filter="url(#bokeh-sm)">
+      <animate attributeName="cx" values="50;90;30;70;50" dur="15s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="550" cy="190" r="70" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="550;480;600;520;550" dur="22s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="110" r="45" fill="url(#bokeh3)" filter="url(#bokeh-sm)">
+      <animate attributeName="cy" values="110;80;130;100;110" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="180" r="50" fill="url(#bokehGold)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="200;250;170;220;200" dur="19s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="650" cy="60" r="35" fill="url(#bokeh2)" filter="url(#bokeh-sm)">
+      <animate attributeName="cx" values="650;690;620;670;650" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="60;90;40;70;60" dur="11s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="450" cy="140" r="50" fill="url(#bokehGold)" filter="url(#bokeh-sm)">
+      <animate attributeName="cy" values="140;110;160;130;140" dur="16s" repeatCount="indefinite"/>
     </circle>
 
-    <!-- 扫描线 -->
+    <!-- 微粒星点 (持续闪烁) -->
+    <circle cx="170" cy="25" r="1.2" fill="#B49BC4" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;0.05;0.4" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="480" cy="195" r="0.8" fill="#6CCB4C" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="730" cy="80" r="1.3" fill="#B33F4E" opacity="0.35">
+      <animate attributeName="opacity" values="0.35;0.05;0.35" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="350" cy="200" r="0.7" fill="#8C6E9F" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="20" r="1" fill="#C9A96E" opacity="0.25">
+      <animate attributeName="opacity" values="0.25;0;0.25" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="120" cy="130" r="0.9" fill="#B49BC4" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0.05;0.3" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="680" cy="200" r="1.1" fill="#6CCB4C" opacity="0.2">
+      <animate attributeName="opacity" values="0.2;0;0.2" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="280" cy="15" r="0.6" fill="#B33F4E" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0;0.3" dur="4.2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- 双扫描线 (对向扫描) -->
     <g opacity="0.015">
-      <line x1="0" y1="0" x2="800" y2="0" stroke="#B49BC4" stroke-width="1">
-        <animate attributeName="y1" values="0;200" dur="10s" repeatCount="indefinite"/>
-        <animate attributeName="y2" values="0;200" dur="10s" repeatCount="indefinite"/>
+      <line x1="0" y1="0" x2="800" y2="0" stroke="#B49BC4" stroke-width="0.8">
+        <animate attributeName="y1" values="0;220" dur="6s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="0;220" dur="6s" repeatCount="indefinite"/>
+      </line>
+      <line x1="800" y1="110" x2="0" y2="110" stroke="#862C3B" stroke-width="0.5">
+        <animate attributeName="y1" values="220;0" dur="8s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="220;0" dur="8s" repeatCount="indefinite"/>
       </line>
     </g>
 
-    <!-- 装饰花簇 -->
-    <g transform="translate(48, 168) scale(0.45)" opacity="0.15" filter="url(#glow)">
+    <!-- 花簇装饰 (呼吸效果) -->
+    <g transform="translate(35, 195) scale(0.35)" opacity="0.1" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.1;0.17;0.1" dur="7s" repeatCount="indefinite"/>
       <use href="#floretCluster"/>
-      <circle cx="0" cy="0" r="5" fill="#862C3B" opacity="0.6"/>
+      <circle cx="0" cy="0" r="5" fill="#862C3B" opacity="0.5"/>
     </g>
-    <g transform="translate(755, 32) scale(0.3)" opacity="0.12" filter="url(#glow)">
+    <g transform="translate(765, 25) scale(0.25)" opacity="0.08" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.08;0.14;0.08" dur="9s" repeatCount="indefinite"/>
       <use href="#floretCluster"/>
-      <circle cx="0" cy="0" r="4" fill="#862C3B" opacity="0.5"/>
+      <circle cx="0" cy="0" r="4" fill="#862C3B" opacity="0.4"/>
+    </g>
+    <g transform="translate(670, 205) scale(0.12) rotate(-20)" opacity="0.07" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.07;0.12;0.07" dur="5.5s" repeatCount="indefinite"/>
+      <use href="#floret" fill="url(#petalPurple)"/>
+    </g>
+    <g transform="translate(150, 40) scale(0.1) rotate(30)" opacity="0.05" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.05;0.09;0.05" dur="6.5s" repeatCount="indefinite"/>
+      <use href="#floret" fill="url(#petalCrimson)"/>
     </g>
 
-    <!-- 荧光茎部 -->
-    <line x1="0" y1="200" x2="200" y2="200" stroke="url(#stemGreen)" stroke-width="1" opacity="0.15"/>
-    <line x1="600" y1="200" x2="800" y2="200" stroke="url(#stemGreen)" stroke-width="1" opacity="0.12"/>
+    <!-- 荧光茎部装饰线 -->
+    <line x1="0" y1="220" x2="200" y2="220" stroke="url(#petalPurple)" stroke-width="0.6" opacity="0.08">
+      <animate attributeName="opacity" values="0.08;0.15;0.08" dur="5s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="220" x2="800" y2="220" stroke="url(#petalCrimson)" stroke-width="0.6" opacity="0.06">
+      <animate attributeName="opacity" values="0.06;0.12;0.06" dur="6s" repeatCount="indefinite"/>
+    </line>
 
-    <!-- ================================================================ -->
-    <!-- SLIDE 1: BRAND IDENTITY (visible: 0s-5s of 20s cycle)        -->
-    <!-- ================================================================ -->
-    <g opacity="1">
-      <animate attributeName="opacity"
-        values="1;1;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1"
-        keyTimes="0;0.22;0.25;0.26;0.27;0.42;0.43;0.44;0.45;0.55;0.56;0.57;0.58;0.72;0.73;0.74;0.75;0.76;0.95;0.97;1"
-        dur="20s" repeatCount="indefinite"/>
+    <!-- ============================================================ -->
+    <!-- ROW 1: BRAND + STATS (y: 0-68)                              -->
+    <!-- ============================================================ -->
 
-      <!-- HOS 主标题 (居中) -->
-      <text x="400" y="68" text-anchor="middle" font-family="'Courier New',monospace" font-size="52" font-weight="bold" fill="url(#titleGrad)" filter="url(#glow-strong)">HOS</text>
-      <text x="400" y="94" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8C6E9F" letter-spacing="5" opacity="0.85">HYACINTH OF SECURITY</text>
+    <!-- 背景微光 -->
+    <rect x="0" y="0" width="800" height="68" fill="rgba(140,110,159,0.02)" rx="0"/>
 
-      <!-- 分隔线 -->
-      <rect x="310" y="104" width="180" height="1.5" rx="0.75" fill="url(#sepGrad)"/>
-
-      <!-- 副标题 -->
-      <text x="400" y="130" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#B49BC4" opacity="0.8">AI × Cybersecurity Practitioner</text>
-
-      <!-- 地点 + 光标 -->
-      <text x="390" y="155" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#5A5A5A">Qian Jiahong · Shanghai, China</text>
-      <rect x="468" y="145" width="7" height="14" rx="1" fill="#862C3B" opacity="0.7">
-        <animate attributeName="opacity" values="0.9;0;0.9" dur="1.2s" repeatCount="indefinite"/>
-      </rect>
-
-      <!-- 盾牌 -->
-      <g transform="translate(400,178)" stroke="#6CCB4C" stroke-width="1" fill="none" opacity="0.15">
-        <path d="M0,-7 L5.5,-4.5 L5.5,1 Q5.5,5.5 0,7.5 Q-5.5,5.5 -5.5,1 L-5.5,-4.5 Z"/>
-      </g>
+    <!-- 品牌区 (左侧) -->
+    <g transform="translate(22, 14)">
+      <text x="0" y="0" font-family="'Courier New',monospace" font-size="34" font-weight="bold" fill="url(#titleGrad)" filter="url(#glow-strong)">HOS</text>
+      <text x="0" y="16" font-family="system-ui,sans-serif" font-size="7" fill="#8C6E9F" letter-spacing="3" opacity="0.75">HYACINTH OF SECURITY</text>
+      <text x="0" y="30" font-family="system-ui,sans-serif" font-size="9" fill="#B49BC4" opacity="0.7">AI × Cybersecurity Practitioner</text>
+      <text x="0" y="43" font-family="system-ui,sans-serif" font-size="7.5" fill="#5A5A5A">Qian Jiahong · Shanghai</text>
     </g>
 
-    <!-- ================================================================ -->
-    <!-- SLIDE 2: LIVE STATS (visible: 5s-10s of 20s cycle)             -->
-    <!-- ================================================================ -->
-    <g opacity="0">
-      <animate attributeName="opacity"
-        values="0;0;0;1;1;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0"
-        keyTimes="0;0.22;0.25;0.26;0.42;0.43;0.44;0.45;0.55;0.56;0.57;0.58;0.72;0.73;0.74;0.75;0.76;0.95;0.97;1"
-        dur="20s" repeatCount="indefinite"/>
+    <!-- 分隔线 -->
+    <line x1="170" y1="12" x2="170" y2="56" stroke="url(#sepGrad)" stroke-width="0.5" opacity="0.3"/>
 
-      <text x="400" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#8C6E9F" letter-spacing="5" opacity="0.5">LIVE STATS</text>
-      <rect x="340" y="46" width="120" height="1" rx="0.5" fill="url(#sepGrad)" opacity="0.3"/>
-
-      <!-- 4 个数字横向居中排列 -->
+    <!-- 统计区 (右侧，4个卡片) -->
+    <g transform="translate(185, 10)">
       <!-- PRs -->
-      <g text-anchor="middle">
-        <text id="stat-prs" x="200" y="95" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">17</text>
-        <text x="200" y="115" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">merged PRs</text>
-        <rect x="172" y="124" width="56" height="1.5" rx="0.75" fill="#862C3B" opacity="0.15"/>
-      </g>
+      <rect x="0" y="0" width="77" height="48" rx="5" fill="url(#cardGrad2)" stroke="#862C3B" stroke-width="0.3" stroke-opacity="0.15"/>
+      <text x="38" y="22" text-anchor="middle" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">
+        <tspan id="stat-prs">17</tspan>
+      </text>
+      <text x="38" y="38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#5A5A5A">merged PRs</text>
+
       <!-- Repos -->
-      <g text-anchor="middle">
-        <text id="stat-repos" x="350" y="95" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGreen)" filter="url(#glow)">16</text>
-        <text x="350" y="115" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">repositories</text>
-        <rect x="322" y="124" width="56" height="1.5" rx="0.75" fill="#6CCB4C" opacity="0.15"/>
-      </g>
+      <rect x="84" y="0" width="77" height="48" rx="5" fill="url(#cardGrad1)" stroke="#8C6E9F" stroke-width="0.3" stroke-opacity="0.15"/>
+      <text x="122" y="22" text-anchor="middle" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="url(#numPurple)" filter="url(#glow)">
+        <tspan id="stat-repos">16</tspan>
+      </text>
+      <text x="122" y="38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#5A5A5A">repositories</text>
+
       <!-- Stars -->
-      <g text-anchor="middle">
-        <text id="stat-stars" x="500" y="95" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numPurple)" filter="url(#glow)">24</text>
-        <text x="500" y="115" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">total stars</text>
-        <rect x="472" y="124" width="56" height="1.5" rx="0.75" fill="#8C6E9F" opacity="0.15"/>
-      </g>
+      <rect x="168" y="0" width="77" height="48" rx="5" fill="url(#cardGrad3)" stroke="#6CCB4C" stroke-width="0.3" stroke-opacity="0.12"/>
+      <text x="206" y="22" text-anchor="middle" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="url(#numGreen)" filter="url(#glow)">
+        <tspan id="stat-stars">24</tspan>
+      </text>
+      <text x="206" y="38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#5A5A5A">total stars</text>
+
       <!-- Followers -->
-      <g text-anchor="middle">
-        <text id="stat-followers" x="650" y="95" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGold)" filter="url(#glow)">34</text>
-        <text x="650" y="115" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">followers</text>
-        <rect x="622" y="124" width="56" height="1.5" rx="0.75" fill="#C9A96E" opacity="0.15"/>
-      </g>
+      <rect x="252" y="0" width="77" height="48" rx="5" fill="url(#cardGrad2)" stroke="#C9A96E" stroke-width="0.3" stroke-opacity="0.15"/>
+      <text x="290" y="22" text-anchor="middle" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="url(#numGold)" filter="url(#glow)">
+        <tspan id="stat-followers">34</tspan>
+      </text>
+      <text x="290" y="38" text-anchor="middle" font-family="system-ui,sans-serif" font-size="6.5" fill="#5A5A5A">followers</text>
 
-      <!-- 底部标签 -->
-      <text x="400" y="165" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#3B3D38" opacity="0.6">Open Source · CSDN Expert Blogger · Intel AI Competition</text>
-      <text x="400" y="182" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#2D2D2D">auto-synced daily via GitHub Actions</text>
+      <!-- 额外数据行 -->
+      <text x="167" y="58" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#3B3D38" opacity="0.45">1,467 articles · 7 PyPI pkgs · 1,007 commits/yr</text>
     </g>
 
-    <!-- ================================================================ -->
-    <!-- SLIDE 3: FOCUS (visible: 10s-15s of 20s cycle)                  -->
-    <!-- ================================================================ -->
-    <g opacity="0">
-      <animate attributeName="opacity"
-        values="0;0;0;0;0;0;1;1;1;0;0;0;0;0;0;0;0;0;0;0;0"
-        keyTimes="0;0.22;0.25;0.26;0.42;0.43;0.44;0.55;0.56;0.57;0.58;0.72;0.73;0.74;0.75;0.76;0.95;0.97;1"
-        dur="20s" repeatCount="indefinite"/>
+    <!-- ============================================================ -->
+    <!-- ROW 2: FLAGSHIP PROJECT (y: 72-120)                         -->
+    <!-- ============================================================ -->
 
-      <text x="400" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#8C6E9F" letter-spacing="5" opacity="0.5">WHAT I BUILD</text>
-      <rect x="330" y="46" width="140" height="1" rx="0.5" fill="url(#sepGrad)" opacity="0.3"/>
+    <!-- 整行背景 -->
+    <rect x="22" y="72" width="756" height="48" rx="6" fill="rgba(140,110,159,0.03)" stroke="#8C6E9F" stroke-width="0.3" stroke-opacity="0.1"/>
+    <rect x="22" y="72" width="3" height="48" rx="1.5" fill="#862C3B" opacity="0.3"/>
 
-      <!-- 3个项目卡片 -->
-      <g>
-        <!-- Card 1 -->
-        <rect x="40" y="65" width="230" height="55" rx="6" fill="rgba(134,44,59,0.06)" stroke="#862C3B" stroke-width="0.4" stroke-opacity="0.2"/>
-        <text x="60" y="86" font-family="'Courier New',monospace" font-size="9" fill="#862C3B" opacity="0.7">01</text>
-        <text x="82" y="86" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#e0e0e0">HOS-LS</text>
-        <text x="82" y="103" font-family="system-ui,sans-serif" font-size="8.5" fill="#6B6B6B">AI-native security platform · 7-agent pipeline</text>
+    <text x="38" y="90" font-family="system-ui,sans-serif" font-size="13" font-weight="bold" fill="#e0e0e0" filter="url(#glow)">HOS-LS</text>
+    <text x="38" y="106" font-family="system-ui,sans-serif" font-size="7.5" fill="#8C6E9F" opacity="0.65">AI-driven Code Security Analysis &amp; Attack Chain Reasoning</text>
 
-        <!-- Card 2 -->
-        <rect x="285" y="65" width="230" height="55" rx="6" fill="rgba(140,110,159,0.06)" stroke="#8C6E9F" stroke-width="0.4" stroke-opacity="0.2"/>
-        <text x="305" y="86" font-family="'Courier New',monospace" font-size="9" fill="#8C6E9F" opacity="0.7">02</text>
-        <text x="327" y="86" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#e0e0e0">Multi-Agent Systems</text>
-        <text x="327" y="103" font-family="system-ui,sans-serif" font-size="8.5" fill="#6B6B6B">LLM orchestration · RAG pipelines</text>
-
-        <!-- Card 3 -->
-        <rect x="530" y="65" width="230" height="55" rx="6" fill="rgba(108,203,76,0.05)" stroke="#6CCB4C" stroke-width="0.4" stroke-opacity="0.15"/>
-        <text x="550" y="86" font-family="'Courier New',monospace" font-size="9" fill="#6CCB4C" opacity="0.7">03</text>
-        <text x="572" y="86" font-family="system-ui,sans-serif" font-size="12" font-weight="bold" fill="#e0e0e0">Security Research</text>
-        <text x="572" y="103" font-family="system-ui,sans-serif" font-size="8.5" fill="#6B6B6B">CTF · AI red team · exploit development</text>
-      </g>
-
-      <!-- 底部技术标签 -->
-      <text x="400" y="150" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A" letter-spacing="1">Python</text>
-      <rect x="370" y="155" width="60" height="1" rx="0.5" fill="#8C6E9F" opacity="0.15"/>
-      <text x="400" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A" letter-spacing="1">PyTorch · LangChain · FastAPI · Docker</text>
-      <text x="400" y="186" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#4A4A4A" letter-spacing="1">vLLM · Neo4j · React · Triton</text>
+    <!-- 4 个特性标签 -->
+    <g transform="translate(340, 78)">
+      <rect x="0" y="0" width="95" height="18" rx="9" fill="rgba(140,110,159,0.08)" stroke="#8C6E9F" stroke-width="0.3" stroke-opacity="0.2"/>
+      <text x="47" y="12" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#B49BC4">🧠 Semantic Analysis</text>
+    </g>
+    <g transform="translate(443, 78)">
+      <rect x="0" y="0" width="95" height="18" rx="9" fill="rgba(134,44,59,0.06)" stroke="#862C3B" stroke-width="0.3" stroke-opacity="0.2"/>
+      <text x="47" y="12" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#B33F4E">⛓️ Attack Chain</text>
+    </g>
+    <g transform="translate(546, 78)">
+      <rect x="0" y="0" width="95" height="18" rx="9" fill="rgba(108,203,76,0.05)" stroke="#6CCB4C" stroke-width="0.3" stroke-opacity="0.15"/>
+      <text x="47" y="12" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#6CCB4C">🤖 Multi-Agent</text>
+    </g>
+    <g transform="translate(649, 78)">
+      <rect x="0" y="0" width="95" height="18" rx="9" fill="rgba(201,169,110,0.05)" stroke="#C9A96E" stroke-width="0.3" stroke-opacity="0.15"/>
+      <text x="47" y="12" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7" fill="#C9A96E">💉 Exploit Gen</text>
     </g>
 
-    <!-- ===== 角标装饰 (始终可见) ===== -->
-    <path d="M0,10 Q0,0 10,0" fill="none" stroke="#8C6E9F" stroke-width="0.5" opacity="0.2"/>
-    <path d="M800,10 Q800,0 790,0" fill="none" stroke="#862C3B" stroke-width="0.5" opacity="0.2"/>
-    <path d="M0,190 Q0,200 10,200" fill="none" stroke="#862C3B" stroke-width="0.5" opacity="0.2"/>
-    <path d="M800,190 Q800,200 790,200" fill="none" stroke="#8C6E9F" stroke-width="0.5" opacity="0.2"/>
+    <!-- 底部标语 -->
+    <text x="38" y="113" font-family="system-ui,sans-serif" font-size="6.5" fill="#3B3D38" opacity="0.35">Beyond Regex · End-to-end Attack Path · Auto Verification</text>
 
-    <!-- 边框釉面高光 -->
-    <rect x="0" y="0" width="800" height="200" rx="12" fill="none" stroke="#8C6E9F" stroke-width="0.3" opacity="0.1"/>
+    <!-- ============================================================ -->
+    <!-- ROW 3: 3 INFO CARDS (y: 124-172)                           -->
+    <!-- ============================================================ -->
+
+    <!-- CARD 1: 开源贡献 -->
+    <rect x="22" y="124" width="245" height="48" rx="6" fill="url(#cardGrad1)" stroke="#8C6E9F" stroke-width="0.3" stroke-opacity="0.1"/>
+    <rect x="22" y="124" width="245" height="48" rx="6" fill="none" stroke="#8C6E9F" stroke-width="0.15" stroke-opacity="0.05"/>
+    <text x="34" y="141" font-family="system-ui,sans-serif" font-size="8.5" font-weight="bold" fill="#B49BC4">Open Source Contributions</text>
+    <text x="34" y="155" font-family="system-ui,sans-serif" font-size="7" fill="#5A5A5A">17 merged PRs across 10+ projects</text>
+    <text x="34" y="166" font-family="system-ui,sans-serif" font-size="6.5" fill="#3B3D38" opacity="0.5">triton · pytorch · garak · flash-attn · liger-kernel</text>
+
+    <!-- CARD 2: CSDN 博客 -->
+    <rect x="277" y="124" width="245" height="48" rx="6" fill="url(#cardGrad2)" stroke="#862C3B" stroke-width="0.3" stroke-opacity="0.1"/>
+    <text x="289" y="141" font-family="system-ui,sans-serif" font-size="8.5" font-weight="bold" fill="#B33F4E">CSDN Blog · Security Hyacinth</text>
+    <text x="289" y="155" font-family="system-ui,sans-serif" font-size="7" fill="#5A5A5A">1,467 articles · 1.2M+ views · 20K+ likes</text>
+    <text x="289" y="166" font-family="system-ui,sans-serif" font-size="6.5" fill="#3B3D38" opacity="0.5">3,312 followers · 12+ systematic columns · 977 code snippets</text>
+
+    <!-- CARD 3: 荣誉认证 -->
+    <rect x="532" y="124" width="246" height="48" rx="6" fill="url(#cardGrad3)" stroke="#C9A96E" stroke-width="0.3" stroke-opacity="0.1"/>
+    <text x="544" y="141" font-family="system-ui,sans-serif" font-size="8.5" font-weight="bold" fill="#C9A96E">Awards &amp; Certifications</text>
+    <text x="544" y="155" font-family="system-ui,sans-serif" font-size="7" fill="#5A5A5A">🏆 中美创客特等奖 · Intel AI 竞赛 · CET-6</text>
+    <text x="544" y="166" font-family="system-ui,sans-serif" font-size="6.5" fill="#3B3D38" opacity="0.5">Aliyun/Huawei Expert · HF Agent · Neo4j · Security Emergency</text>
+
+    <!-- ============================================================ -->
+    <!-- ROW 4: TECH STACK + CONTACT (y: 176-218)                    -->
+    <!-- ============================================================ -->
+
+    <!-- 技术栈行 -->
+    <rect x="22" y="176" width="508" height="36" rx="6" fill="rgba(30,31,29,0.3)" stroke="#8C6E9F" stroke-width="0.2" stroke-opacity="0.08"/>
+
+    <!-- 技术标签 -->
+    <g transform="translate(30, 182)">
+      <rect x="0" y="0" width="0" height="0" rx="0"/>
+      <text x="0" y="11" font-family="system-ui,sans-serif" font-size="7.5" fill="#B49BC4" opacity="0.7">Python</text>
+      <text x="0" y="25" font-family="system-ui,sans-serif" font-size="7.5" fill="#B49BC4" opacity="0.7">PyTorch</text>
+    </g>
+    <g transform="translate(72, 182)">
+      <text x="0" y="11" font-family="system-ui,sans-serif" font-size="7.5" fill="#6CCB4C" opacity="0.6">FastAPI</text>
+      <text x="0" y="25" font-family="system-ui,sans-serif" font-size="7.5" fill="#6CCB4C" opacity="0.6">Docker</text>
+    </g>
+    <g transform="translate(148, 182)">
+      <text x="0" y="11" font-family="system-ui,sans-serif" font-size="7.5" fill="#C9A96E" opacity="0.55">vLLM</text>
+      <text x="0" y="25" font-family="system-ui,sans-serif" font-size="7.5" fill="#C9A96E" opacity="0.55">Neo4j</text>
+    </g>
+    <g transform="translate(215, 182)">
+      <text x="0" y="11" font-family="system-ui,sans-serif" font-size="7.5" fill="#B33F4E" opacity="0.5">LangChain</text>
+      <text x="0" y="25" font-family="system-ui,sans-serif" font-size="7.5" fill="#B33F4E" opacity="0.5">React</text>
+    </g>
+    <g transform="translate(295, 182)">
+      <text x="0" y="11" font-family="system-ui,sans-serif" font-size="7.5" fill="#8C6E9F" opacity="0.5">QLoRA</text>
+      <text x="0" y="25" font-family="system-ui,sans-serif" font-size="7.5" fill="#8C6E9F" opacity="0.5">RAG</text>
+    </g>
+    <g transform="translate(365, 182)">
+      <text x="0" y="11" font-family="system-ui,sans-serif" font-size="7.5" fill="#6CCB4C" opacity="0.45">Multi-Agent</text>
+      <text x="0" y="25" font-family="system-ui,sans-serif" font-size="7.5" fill="#6CCB4C" opacity="0.45">CTF</text>
+    </g>
+    <g transform="translate(450, 182)">
+      <text x="0" y="11" font-family="system-ui,sans-serif" font-size="7.5" fill="#C9A96E" opacity="0.4">Triton</text>
+      <text x="0" y="25" font-family="system-ui,sans-serif" font-size="7.5" fill="#C9A96E" opacity="0.4">Exploit Dev</text>
+    </g>
+
+    <!-- 联系区 -->
+    <rect x="540" y="176" width="238" height="36" rx="6" fill="rgba(30,31,29,0.3)" stroke="#862C3B" stroke-width="0.2" stroke-opacity="0.08"/>
+    <text x="552" y="193" font-family="system-ui,sans-serif" font-size="8" fill="#5A5A5A">✉ aqfxz_zh@qq.com</text>
+    <text x="552" y="206" font-family="system-ui,sans-serif" font-size="7" fill="#3B3D38" opacity="0.4">github.com/lxcxjxhx · security-hyacinth.blog.csdn.net</text>
+
+    <!-- ============================================================ -->
+    <!-- 装饰边框 (始终可见)                                          -->
+    <!-- ============================================================ -->
+    <path d="M0,8 Q0,0 8,0" fill="none" stroke="#8C6E9F" stroke-width="0.35" opacity="0.15"/>
+    <path d="M800,8 Q800,0 792,0" fill="none" stroke="#862C3B" stroke-width="0.35" opacity="0.15"/>
+    <path d="M0,212 Q0,220 8,220" fill="none" stroke="#862C3B" stroke-width="0.35" opacity="0.15"/>
+    <path d="M800,212 Q800,220 792,220" fill="none" stroke="#8C6E9F" stroke-width="0.35" opacity="0.15"/>
+    <rect x="0" y="0" width="800" height="220" rx="12" fill="none" stroke="#8C6E9F" stroke-width="0.2" opacity="0.08"/>
   </g>
 </svg>
