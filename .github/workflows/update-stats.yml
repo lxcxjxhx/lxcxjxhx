@@ -1,4 +1,4 @@
-name: Update Profile Stats
+name: Update Profile Stats & SVG
 
 on:
   schedule:
@@ -24,30 +24,58 @@ jobs:
           PRS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/search/issues?q=author:lxcxjxhx+type:pr+is:merged" | \
             jq -r '.total_count')
-          echo "{\"schemaVersion\":1,\"label\":\"merged PRs\",\"message\":\"$PRS\",\"color\":\"A85D5D\"}" > stats/prs.json
+          echo "{\"schemaVersion\":1,\"label\":\"merged PRs\",\"message\":\"$PRS\",\"color\":\"f38ba8\"}" > stats/prs.json
 
           # Public repositories
           REPOS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/users/lxcxjxhx" | \
             jq -r '.public_repos')
-          echo "{\"schemaVersion\":1,\"label\":\"repositories\",\"message\":\"$REPOS\",\"color\":\"5A7A6A\"}" > stats/repos.json
+          echo "{\"schemaVersion\":1,\"label\":\"repositories\",\"message\":\"$REPOS\",\"color\":\"a9b665\"}" > stats/repos.json
 
-          # Total stars across all repos
-          STARS=$(curl -s -H "Authorization: token $GH_TOKEN" \
-            "https://api.github.com/users/lxcxjxhx/repos?per_page=100" | \
-            jq -r '[.[].stargazers_count] | add // 0')
-          echo "{\"schemaVersion\":1,\"label\":\"total stars\",\"message\":\"$STARS\",\"color\":\"9B7CB6\"}" > stats/stars.json
+          # Total stars across all repos (handle pagination)
+          STARS=0
+          for page in 1 2 3; do
+            PAGE_STARS=$(curl -s -H "Authorization: token $GH_TOKEN" \
+              "https://api.github.com/users/lxcxjxhx/repos?per_page=100&page=$page" | \
+              jq -r '[.[].stargazers_count] | add // 0')
+            STARS=$((STARS + PAGE_STARS))
+          done
+          echo "{\"schemaVersion\":1,\"label\":\"total stars\",\"message\":\"$STARS\",\"color\":\"94e2d5\"}" > stats/stars.json
 
           # Followers
           FOLL=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/users/lxcxjxhx" | \
             jq -r '.followers')
-          echo "{\"schemaVersion\":1,\"label\":\"followers\",\"message\":\"$FOLL\",\"color\":\"8B7355\"}" > stats/followers.json
+          echo "{\"schemaVersion\":1,\"label\":\"followers\",\"message\":\"$FOLL\",\"color\":\"f9e2af\"}" > stats/followers.json
+
+      - name: Inject stats into SVG
+        run: |
+          PRS=$(jq -r '.message' stats/prs.json)
+          REPOS=$(jq -r '.message' stats/repos.json)
+          STARS=$(jq -r '.message' stats/stars.json)
+          FOLLOWERS=$(jq -r '.message' stats/followers.json)
+
+          # Replace only the text content (number) inside <text id="stat-xxx">..</text>
+          # Export vars so perl can access them via $ENV
+          export PRS REPOS STARS FOLLOWERS
+          perl -i -pe 's/(<text id="stat-prs"[^>]*>)[^<]*(<\/text>)/$1$ENV{PRS}$2/' profile-anim.svg
+          perl -i -pe 's/(<text id="stat-repos"[^>]*>)[^<]*(<\/text>)/$1$ENV{REPOS}$2/' profile-anim.svg
+          perl -i -pe 's/(<text id="stat-stars"[^>]*>)[^<]*(<\/text>)/$1$ENV{STARS}$2/' profile-anim.svg
+          perl -i -pe 's/(<text id="stat-followers"[^>]*>)[^<]*(<\/text>)/$1$ENV{FOLLOWERS}$2/' profile-anim.svg
+
+      - name: Generate streak stats
+        uses: DenverCoder1/github-readme-streak-stats@main
+        with:
+          GITHUB_TOKEN: ${{ github.token }}
+          owner: ${{ github.repository_owner }}
+          path: dist/streak.svg
+          options: 'theme=tokyonight&hide_border=true&background=00000000&stroke=45475a&ring=b48ead&fire=f38ba8&currStreakNum=cdd6f4&sideNums=cdd6f4&currStreakLabel=a6adc8&sideLabels=a6adc8&dates=6c7086'
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add stats/
-          git diff --cached --quiet || git commit -m "chore: update stats [skip ci]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p dist
+          git add stats/ profile-anim.svg dist/streak.svg
+          git diff --cached --quiet || git commit -m "chore: update profile stats [skip ci]"
           git push
