@@ -78,4 +78,5 @@ jobs:
           mkdir -p dist
           git add stats/ profile-anim.svg dist/streak.svg
           git diff --cached --quiet || git commit -m "chore: update profile stats [skip ci]"
+          git pull --rebase origin main || true
           git push
