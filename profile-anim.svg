@@ -92,13 +92,13 @@
 
       <!-- Repos -->
       <g text-anchor="end">
-        <text id="stat-repos" x="700" y="126" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="#a9b665" filter="url(#glow)">13</text>
+        <text id="stat-repos" x="700" y="126" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="#a9b665" filter="url(#glow)">16</text>
         <text x="700" y="140" font-family="system-ui,sans-serif" font-size="9" fill="#a6adc8">repositories</text>
       </g>
 
       <!-- Stars -->
       <g text-anchor="end">
-        <text id="stat-stars" x="600" y="82" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="#94e2d5" filter="url(#glow)">19</text>
+        <text id="stat-stars" x="600" y="82" font-family="'Courier New',monospace" font-size="22" font-weight="bold" fill="#94e2d5" filter="url(#glow)">24</text>
         <text x="600" y="96" font-family="system-ui,sans-serif" font-size="9" fill="#a6adc8">total stars</text>
       </g>
 
