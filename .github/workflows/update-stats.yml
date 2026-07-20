@@ -1,4 +1,4 @@
-name: Update Profile Stats & SVG
+name: Update Profile Stats
 
 on:
   schedule:
@@ -55,28 +55,17 @@ jobs:
           STARS=$(jq -r '.message' stats/stars.json)
           FOLLOWERS=$(jq -r '.message' stats/followers.json)
 
-          # Replace only the text content (number) inside <text id="stat-xxx">..</text>
-          # Export vars so perl can access them via $ENV
           export PRS REPOS STARS FOLLOWERS
           perl -i -pe 's/(<text id="stat-prs"[^>]*>)[^<]*(<\/text>)/$1$ENV{PRS}$2/' profile-anim.svg
           perl -i -pe 's/(<text id="stat-repos"[^>]*>)[^<]*(<\/text>)/$1$ENV{REPOS}$2/' profile-anim.svg
           perl -i -pe 's/(<text id="stat-stars"[^>]*>)[^<]*(<\/text>)/$1$ENV{STARS}$2/' profile-anim.svg
           perl -i -pe 's/(<text id="stat-followers"[^>]*>)[^<]*(<\/text>)/$1$ENV{FOLLOWERS}$2/' profile-anim.svg
 
-      - name: Generate streak stats
-        uses: DenverCoder1/github-readme-streak-stats@main
-        with:
-          GITHUB_TOKEN: ${{ github.token }}
-          owner: ${{ github.repository_owner }}
-          path: dist/streak.svg
-          options: 'theme=tokyonight&hide_border=true&background=00000000&stroke=45475a&ring=b48ead&fire=f38ba8&currStreakNum=cdd6f4&sideNums=cdd6f4&currStreakLabel=a6adc8&sideLabels=a6adc8&dates=6c7086'
-
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          mkdir -p dist
-          git add stats/ profile-anim.svg dist/streak.svg
-          git diff --cached --quiet || git commit -m "chore: update profile stats [skip ci]"
+          git add stats/ profile-anim.svg
+          git diff --cached --quiet || git commit -m "chore: update stats [skip ci]"
           git pull --rebase origin main || true
           git push
