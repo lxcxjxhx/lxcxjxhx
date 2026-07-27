@@ -20,16 +20,18 @@ jobs:
         run: |
           mkdir -p stats
 
-          # Merged PRs
+          # Merged PRs - with error handling
           PRS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/search/issues?q=author:lxcxjxhx+type:pr+is:merged" | \
-            jq -r '.total_count')
+            jq -r '.total_count // 0')
+          echo "Fetched PRS: $PRS"
           echo "{\"schemaVersion\":1,\"label\":\"merged PRs\",\"message\":\"$PRS\",\"color\":\"f38ba8\"}" > stats/prs.json
 
-          # Public repositories
+          # Public repositories - with error handling
           REPOS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/users/lxcxjxhx" | \
-            jq -r '.public_repos')
+            jq -r '.public_repos // 0')
+          echo "Fetched REPOS: $REPOS"
           echo "{\"schemaVersion\":1,\"label\":\"repositories\",\"message\":\"$REPOS\",\"color\":\"a9b665\"}" > stats/repos.json
 
           # Total stars across all repos (handle pagination)
@@ -40,32 +42,66 @@ jobs:
               jq -r '[.[].stargazers_count] | add // 0')
             STARS=$((STARS + PAGE_STARS))
           done
+          echo "Fetched STARS: $STARS"
           echo "{\"schemaVersion\":1,\"label\":\"total stars\",\"message\":\"$STARS\",\"color\":\"94e2d5\"}" > stats/stars.json
 
-          # Followers
+          # Followers - with error handling
           FOLL=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/users/lxcxjxhx" | \
-            jq -r '.followers')
+            jq -r '.followers // 0')
+          echo "Fetched FOLLOWERS: $FOLL"
           echo "{\"schemaVersion\":1,\"label\":\"followers\",\"message\":\"$FOLL\",\"color\":\"f9e2af\"}" > stats/followers.json
+
+          # Export for next step
+          echo "PRS=$PRS" >> $GITHUB_ENV
+          echo "REPOS=$REPOS" >> $GITHUB_ENV
+          echo "STARS=$STARS" >> $GITHUB_ENV
+          echo "FOLLOWERS=$FOLL" >> $GITHUB_ENV
 
       - name: Inject stats into SVG
         run: |
-          PRS=$(jq -r '.message' stats/prs.json)
-          REPOS=$(jq -r '.message' stats/repos.json)
-          STARS=$(jq -r '.message' stats/stars.json)
-          FOLLOWERS=$(jq -r '.message' stats/followers.json)
+          PRS="${{ env.PRS }}"
+          REPOS="${{ env.REPOS }}"
+          STARS="${{ env.STARS }}"
+          FOLLOWERS="${{ env.FOLLOWERS }}"
 
+          echo "Injecting: PRS=$PRS REPOS=$REPOS STARS=$STARS FOLLOWERS=$FOLLOWERS"
+
+          # Use perl with explicit error checking
           export PRS REPOS STARS FOLLOWERS
-          perl -i -pe 's/(<text id="stat-prs"[^>]*>)[^<]*(<\/text>)/$1$ENV{PRS}$2/' profile-anim.svg
-          perl -i -pe 's/(<text id="stat-repos"[^>]*>)[^<]*(<\/text>)/$1$ENV{REPOS}$2/' profile-anim.svg
-          perl -i -pe 's/(<text id="stat-stars"[^>]*>)[^<]*(<\/text>)/$1$ENV{STARS}$2/' profile-anim.svg
-          perl -i -pe 's/(<text id="stat-followers"[^>]*>)[^<]*(<\/text>)/$1$ENV{FOLLOWERS}$2/' profile-anim.svg
+
+          perl -i -pe 's/(<text id="stat-prs"[^>]*>)[^<]*(<\/text>)/$1$ENV{PRS}$2/g' profile-anim.svg
+          perl -i -pe 's/(<text id="stat-repos"[^>]*>)[^<]*(<\/text>)/$1$ENV{REPOS}$2/g' profile-anim.svg
+          perl -i -pe 's/(<text id="stat-stars"[^>]*>)[^<]*(<\/text>)/$1$ENV{STARS}$2/g' profile-anim.svg
+          perl -i -pe 's/(<text id="stat-followers"[^>]*>)[^<]*(<\/text>)/$1$ENV{FOLLOWERS}$2/g' profile-anim.svg
+
+          # Verify injection succeeded
+          echo "=== Verification ==="
+          grep 'stat-prs' profile-anim.svg
+          grep 'stat-repos' profile-anim.svg
+          grep 'stat-stars' profile-anim.svg
+          grep 'stat-followers' profile-anim.svg
+
+          # Check if any value is empty or null
+          if grep -q 'stat-prs">[[:space:]]*<' profile-anim.svg || \
+             grep -q 'stat-prs">null<' profile-anim.svg; then
+            echo "ERROR: Stats injection failed for PRS!"
+            exit 1
+          fi
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add stats/ profile-anim.svg
-          git diff --cached --quiet || git commit -m "chore: update stats [skip ci]"
-          git pull --rebase origin main || true
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update stats [skip ci]"
+            # Use force-with-lease to handle any remote changes safely
+            git push --force-with-lease || {
+              echo "Push failed, pulling and retrying..."
+              git pull --rebase origin main
+              git push
+            }
+          fi
