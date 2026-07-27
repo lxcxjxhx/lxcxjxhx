@@ -323,7 +323,7 @@
       <text x="647" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#C94858" opacity="0.6">MCP · Threat Detection</text>
 
       <!-- 开源贡献高亮 -->
-      <text x="400" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#DDB87E" opacity="0.75">17 merged PRs · triton · pytorch · garak · flash-attn · liger-kernel · pydantic-ai</text>
+      <text x="400" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#DDB87E" opacity="0.75">OSS Contributions · triton · pytorch · garak · flash-attn · liger-kernel · pydantic-ai</text>
 
       <rect x="250" y="134" width="300" height="0.5" fill="url(#sepGrad)" opacity="0.2"/>
 
