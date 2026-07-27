@@ -297,23 +297,40 @@
       <text x="400" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#6A6A6A">1,467+ original articles - 7 PyPI packages - 1,007 commits in 2025</text>
     </g>
 
-    <!-- SLIDE 5: TECH & CONTACT (15.5-19.5s) -->
+    <!-- SLIDE 5: TECH & CONTACT (15.5-19.5s) - 三列玻璃卡片 -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.775;0.8;0.975;1" dur="20s" repeatCount="indefinite"/>
 
-      <text x="400" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#B49BC4" letter-spacing="6" opacity="0.55">TECH STACK &amp; CONTACT</text>
-      <rect x="300" y="44" width="200" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
+      <text x="400" y="32" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#B49BC4" letter-spacing="6" opacity="0.55">TECH STACK &amp; CONTACT</text>
+      <rect x="300" y="40" width="200" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
 
-      <!-- 技术栈分类行 -->
-      <text x="400" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#C4A8D4" opacity="0.75" letter-spacing="1.5">Python - PyTorch - LangChain - FastAPI - Docker - vLLM</text>
-      <text x="400" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6CCB4C" opacity="0.65" letter-spacing="1.5">Neo4j - React - Triton - QLoRA - RAG - Multi-Agent</text>
-      <text x="400" y="120" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#C9A96E" opacity="0.55" letter-spacing="1.5">CTF - Exploit Dev - MCP - GitHub Actions - CI/CD</text>
+      <!-- 技术栈卡片 1: AI/ML (紫色系) -->
+      <rect x="40" y="50" width="226" height="58" rx="8" fill="#8C6E9F" fill-opacity="0.04" stroke="#B49BC4" stroke-opacity="0.1" stroke-width="0.5"/>
+      <text x="153" y="66" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" font-weight="bold" fill="#C4A8D4" opacity="0.85">AI / MACHINE LEARNING</text>
+      <text x="153" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#C4A8D4" opacity="0.6">Python · PyTorch · LangChain</text>
+      <text x="153" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#C4A8D4" opacity="0.6">vLLM · QLoRA · RAG</text>
 
-      <rect x="250" y="136" width="300" height="0.5" fill="url(#sepGrad)" opacity="0.2"/>
+      <!-- 技术栈卡片 2: Dev & Infra (绿色系) -->
+      <rect x="287" y="50" width="226" height="58" rx="8" fill="#6CCB4C" fill-opacity="0.03" stroke="#6CCB4C" stroke-opacity="0.08" stroke-width="0.5"/>
+      <text x="400" y="66" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" font-weight="bold" fill="#6CCB4C" opacity="0.8">DEV &amp; INFRASTRUCTURE</text>
+      <text x="400" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#6CCB4C" opacity="0.6">FastAPI · Docker · Neo4j · React</text>
+      <text x="400" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#6CCB4C" opacity="0.6">Triton · GitHub Actions · CI/CD</text>
 
-      <text x="400" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#6A6A6A">17 merged PRs - triton - pytorch - garak - flash-attn - liger-kernel - pydantic-ai</text>
+      <!-- 技术栈卡片 3: Security (绯红系) -->
+      <rect x="534" y="50" width="226" height="58" rx="8" fill="#C94858" fill-opacity="0.04" stroke="#C94858" stroke-opacity="0.1" stroke-width="0.5"/>
+      <text x="647" y="66" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" font-weight="bold" fill="#C94858" opacity="0.85">SECURITY &amp; RESEARCH</text>
+      <text x="647" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#C94858" opacity="0.6">CTF · Exploit Dev · Multi-Agent</text>
+      <text x="647" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#C94858" opacity="0.6">MCP · Threat Detection</text>
 
-      <text x="400" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A" opacity="0.45">aqfxz_zh@qq.com - github.com/lxcxjxhx - security-hyacinth.blog.csdn.net</text>
+      <!-- 开源贡献高亮 -->
+      <text x="400" y="124" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#DDB87E" opacity="0.75">17 merged PRs · triton · pytorch · garak · flash-attn · liger-kernel · pydantic-ai</text>
+
+      <rect x="250" y="134" width="300" height="0.5" fill="url(#sepGrad)" opacity="0.2"/>
+
+      <!-- 联系信息卡片 -->
+      <rect x="200" y="144" width="400" height="38" rx="8" fill="#C9A96E" fill-opacity="0.03" stroke="#C9A96E" stroke-opacity="0.08" stroke-width="0.5"/>
+      <text x="400" y="164" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#DDB87E" opacity="0.85">aqfxz_zh@qq.com</text>
+      <text x="400" y="178" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#8B6D3F" opacity="0.7">github.com/lxcxjxhx · security-hyacinth.blog.csdn.net</text>
     </g>
 
     <!-- ============ 进度指示器 (5个点, 20s同步) ============ -->
