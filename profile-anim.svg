@@ -1,36 +1,56 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" width="800" height="200">
   <defs>
-    <filter id="glow"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="glow-strong"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="bokeh-blur"><feGaussianBlur stdDeviation="16"/></filter>
-    <filter id="bokeh-sm"><feGaussianBlur stdDeviation="8"/></filter>
+    <!-- ========== 滤镜系统 ========== -->
+    <filter id="glow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow-strong"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow-soft"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="bokeh-blur"><feGaussianBlur stdDeviation="18"/></filter>
+    <filter id="bokeh-sm"><feGaussianBlur stdDeviation="10"/></filter>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.43 0 0 0 0 0.62 0 0 0 0.02 0"/>
+    </filter>
 
-    <radialGradient id="bgGrad" cx="50%" cy="40%" r="75%">
-      <stop offset="0%" stop-color="#1E1F1D"/><stop offset="45%" stop-color="#141514"/><stop offset="100%" stop-color="#080808"/>
+    <!-- ========== 渐变系统 ========== -->
+    <radialGradient id="bgGrad" cx="50%" cy="35%" r="80%">
+      <stop offset="0%" stop-color="#1A1B19"/><stop offset="40%" stop-color="#121110"/><stop offset="100%" stop-color="#060605"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="65%">
+      <stop offset="55%" stop-color="#000000" stop-opacity="0"/><stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
     </radialGradient>
     <linearGradient id="petalPurple" x1="0" y1="0" x2="0.5" y2="1">
-      <stop offset="0%" stop-color="#B49BC4"/><stop offset="40%" stop-color="#8C6E9F"/><stop offset="100%" stop-color="#2D1A36"/>
+      <stop offset="0%" stop-color="#C4A8D4"/><stop offset="40%" stop-color="#8C6E9F"/><stop offset="100%" stop-color="#2D1A36"/>
     </linearGradient>
     <linearGradient id="petalCrimson" x1="0" y1="0" x2="0.5" y2="1">
-      <stop offset="0%" stop-color="#B33F4E"/><stop offset="45%" stop-color="#862C3B"/><stop offset="100%" stop-color="#392A40"/>
+      <stop offset="0%" stop-color="#C94858"/><stop offset="45%" stop-color="#862C3B"/><stop offset="100%" stop-color="#392A40"/>
     </linearGradient>
     <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#B49BC4"/><stop offset="50%" stop-color="#8C6E9F"/><stop offset="100%" stop-color="#B33F4E"/>
+      <stop offset="0%" stop-color="#C4A8D4"/><stop offset="50%" stop-color="#8C6E9F"/><stop offset="100%" stop-color="#C94858"/>
     </linearGradient>
     <linearGradient id="sepGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#862C3B" stop-opacity="0"/><stop offset="50%" stop-color="#8C6E9F" stop-opacity="0.4"/><stop offset="100%" stop-color="#862C3B" stop-opacity="0"/>
+      <stop offset="0%" stop-color="#862C3B" stop-opacity="0"/><stop offset="50%" stop-color="#8C6E9F" stop-opacity="0.5"/><stop offset="100%" stop-color="#862C3B" stop-opacity="0"/>
     </linearGradient>
-    <radialGradient id="numRed" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#B33F4E"/><stop offset="100%" stop-color="#862C3B"/></radialGradient>
-    <radialGradient id="numGreen" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#6CCB4C"/><stop offset="100%" stop-color="#3b7a28"/></radialGradient>
-    <radialGradient id="numPurple" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#B49BC4"/><stop offset="100%" stop-color="#8C6E9F"/></radialGradient>
-    <radialGradient id="numGold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#C9A96E"/><stop offset="100%" stop-color="#8B6D3F"/></radialGradient>
-    <radialGradient id="bokeh1"><stop offset="0%" stop-color="#8C6E9F" stop-opacity="0.18"/><stop offset="100%" stop-color="#8C6E9F" stop-opacity="0"/></radialGradient>
-    <radialGradient id="bokeh2"><stop offset="0%" stop-color="#862C3B" stop-opacity="0.14"/><stop offset="100%" stop-color="#862C3B" stop-opacity="0"/></radialGradient>
-    <radialGradient id="bokeh3"><stop offset="0%" stop-color="#6CCB4C" stop-opacity="0.1"/><stop offset="100%" stop-color="#6CCB4C" stop-opacity="0"/></radialGradient>
-    <radialGradient id="bokehGold"><stop offset="0%" stop-color="#C9A96E" stop-opacity="0.08"/><stop offset="100%" stop-color="#C9A96E" stop-opacity="0"/></radialGradient>
+    <radialGradient id="numRed" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#D85666"/><stop offset="100%" stop-color="#862C3B"/></radialGradient>
+    <radialGradient id="numGreen" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#7CEB5C"/><stop offset="100%" stop-color="#3b7a28"/></radialGradient>
+    <radialGradient id="numPurple" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#C4A8D4"/><stop offset="100%" stop-color="#8C6E9F"/></radialGradient>
+    <radialGradient id="numGold" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#DDB87E"/><stop offset="100%" stop-color="#8B6D3F"/></radialGradient>
+
+    <!-- 散景渐变 -->
+    <radialGradient id="bokeh1"><stop offset="0%" stop-color="#8C6E9F" stop-opacity="0.16"/><stop offset="100%" stop-color="#8C6E9F" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bokeh2"><stop offset="0%" stop-color="#862C3B" stop-opacity="0.12"/><stop offset="100%" stop-color="#862C3B" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bokeh3"><stop offset="0%" stop-color="#6CCB4C" stop-opacity="0.08"/><stop offset="100%" stop-color="#6CCB4C" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bokehGold"><stop offset="0%" stop-color="#C9A96E" stop-opacity="0.07"/><stop offset="100%" stop-color="#C9A96E" stop-opacity="0"/></radialGradient>
+
+    <!-- 进度点渐变 -->
+    <radialGradient id="dotPurple"><stop offset="0%" stop-color="#C4A8D4"/><stop offset="100%" stop-color="#8C6E9F"/></radialGradient>
+    <radialGradient id="dotCrimson"><stop offset="0%" stop-color="#C94858"/><stop offset="100%" stop-color="#862C3B"/></radialGradient>
+    <radialGradient id="dotDark"><stop offset="0%" stop-color="#A03B48"/><stop offset="100%" stop-color="#5C1E2A"/></radialGradient>
+    <radialGradient id="dotGold"><stop offset="0%" stop-color="#DDB87E"/><stop offset="100%" stop-color="#8B6D3F"/></radialGradient>
+    <radialGradient id="dotGreen"><stop offset="0%" stop-color="#7CEB5C"/><stop offset="100%" stop-color="#3b7a28"/></radialGradient>
 
     <clipPath id="clip"><rect width="800" height="200" rx="12"/></clipPath>
 
+    <!-- 风信子花瓣 -->
     <path id="floret" d="M0,-18 C4,-18 8,-12 9,-4 C10,2 6,8 0,12 C-6,8 -10,2 -9,-4 C-8,-12 -4,-18 0,-18Z"/>
     <g id="floretCluster">
       <use href="#floret" fill="url(#petalPurple)" opacity="0.9"/>
@@ -43,213 +63,276 @@
   </defs>
 
   <g clip-path="url(#clip)">
-    <!-- ============ 背景层 (始终可见) ============ -->
+    <!-- ============ 深度背景层 ============ -->
     <rect width="800" height="200" fill="url(#bgGrad)" rx="12"/>
 
-    <!-- 大面积散景 (10个) -->
-    <circle cx="100" cy="60" r="80" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
+    <!-- 噪点纹理 (胶片质感) -->
+    <rect width="800" height="200" filter="url(#noise)" opacity="0.5"/>
+
+    <!-- 大面积动态散景 (12个, 更自然) -->
+    <circle cx="100" cy="60" r="85" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
       <animate attributeName="cx" values="100;200;50;120;100" dur="18s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="60;30;90;50;60" dur="14s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="700" cy="170" r="90" fill="url(#bokeh2)" filter="url(#bokeh-blur)">
+    <circle cx="700" cy="170" r="95" fill="url(#bokeh2)" filter="url(#bokeh-blur)">
       <animate attributeName="cx" values="700;600;750;650;700" dur="20s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="170;140;190;160;170" dur="16s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="400" cy="30" r="55" fill="url(#bokeh3)" filter="url(#bokeh-blur)">
+    <circle cx="400" cy="30" r="60" fill="url(#bokeh3)" filter="url(#bokeh-blur)">
       <animate attributeName="cx" values="400;480;340;420;400" dur="17s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="30;50;20;40;30" dur="12s" repeatCount="indefinite"/>
-      <animate attributeName="r" values="55;70;45;60;55" dur="11s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="60;75;50;65;60" dur="11s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="780" cy="40" r="40" fill="url(#bokeh1)" filter="url(#bokeh-sm)">
+    <circle cx="780" cy="40" r="45" fill="url(#bokeh1)" filter="url(#bokeh-sm)">
       <animate attributeName="cy" values="40;80;20;60;40" dur="13s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="50" cy="180" r="60" fill="url(#bokeh2)" filter="url(#bokeh-sm)">
+    <circle cx="50" cy="180" r="65" fill="url(#bokeh2)" filter="url(#bokeh-sm)">
       <animate attributeName="cx" values="50;90;30;70;50" dur="15s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="550" cy="190" r="70" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
+    <circle cx="550" cy="190" r="75" fill="url(#bokeh1)" filter="url(#bokeh-blur)">
       <animate attributeName="cx" values="550;480;600;520;550" dur="22s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="300" cy="110" r="45" fill="url(#bokeh3)" filter="url(#bokeh-sm)">
+    <circle cx="300" cy="110" r="50" fill="url(#bokeh3)" filter="url(#bokeh-sm)">
       <animate attributeName="cy" values="110;80;130;100;110" dur="10s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="200" cy="180" r="50" fill="url(#bokehGold)" filter="url(#bokeh-blur)">
+    <circle cx="200" cy="180" r="55" fill="url(#bokehGold)" filter="url(#bokeh-blur)">
       <animate attributeName="cx" values="200;250;170;220;200" dur="19s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="650" cy="60" r="35" fill="url(#bokeh2)" filter="url(#bokeh-sm)">
+    <circle cx="650" cy="60" r="40" fill="url(#bokeh2)" filter="url(#bokeh-sm)">
       <animate attributeName="cx" values="650;690;620;670;650" dur="14s" repeatCount="indefinite"/>
       <animate attributeName="cy" values="60;90;40;70;60" dur="11s" repeatCount="indefinite"/>
     </circle>
-    <circle cx="450" cy="140" r="50" fill="url(#bokehGold)" filter="url(#bokeh-sm)">
+    <circle cx="450" cy="140" r="55" fill="url(#bokehGold)" filter="url(#bokeh-sm)">
       <animate attributeName="cy" values="140;110;160;130;140" dur="16s" repeatCount="indefinite"/>
     </circle>
+    <circle cx="120" cy="100" r="35" fill="url(#bokeh1)" filter="url(#bokeh-sm)">
+      <animate attributeName="cx" values="120;160;90;140;120" dur="12s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="620" cy="130" r="40" fill="url(#bokeh3)" filter="url(#bokeh-sm)">
+      <animate attributeName="cy" values="130;100;150;120;130" dur="14s" repeatCount="indefinite"/>
+    </circle>
 
-    <!-- 微粒星点 -->
-    <circle cx="170" cy="25" r="1.2" fill="#B49BC4" opacity="0.4"><animate attributeName="opacity" values="0.4;0.05;0.4" dur="2.8s" repeatCount="indefinite"/></circle>
-    <circle cx="480" cy="195" r="0.8" fill="#6CCB4C" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="3.5s" repeatCount="indefinite"/></circle>
-    <circle cx="730" cy="80" r="1.3" fill="#B33F4E" opacity="0.35"><animate attributeName="opacity" values="0.35;0.05;0.35" dur="2.2s" repeatCount="indefinite"/></circle>
-    <circle cx="350" cy="200" r="0.7" fill="#8C6E9F" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="3.2s" repeatCount="indefinite"/></circle>
-    <circle cx="600" cy="20" r="1" fill="#C9A96E" opacity="0.25"><animate attributeName="opacity" values="0.25;0;0.25" dur="4s" repeatCount="indefinite"/></circle>
-    <circle cx="120" cy="130" r="0.9" fill="#B49BC4" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
-    <circle cx="680" cy="200" r="1.1" fill="#6CCB4C" opacity="0.2"><animate attributeName="opacity" values="0.2;0;0.2" dur="3.8s" repeatCount="indefinite"/></circle>
-    <circle cx="280" cy="15" r="0.6" fill="#B33F4E" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="4.2s" repeatCount="indefinite"/></circle>
+    <!-- 微粒星点 (12个, 多层闪烁) -->
+    <circle cx="170" cy="25" r="1.2" fill="#C4A8D4" opacity="0.45"><animate attributeName="opacity" values="0.45;0.05;0.45" dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="480" cy="195" r="0.9" fill="#6CCB4C" opacity="0.35"><animate attributeName="opacity" values="0.35;0;0.35" dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="730" cy="80" r="1.4" fill="#C94858" opacity="0.4"><animate attributeName="opacity" values="0.4;0.05;0.4" dur="2.2s" repeatCount="indefinite"/></circle>
+    <circle cx="350" cy="200" r="0.8" fill="#8C6E9F" opacity="0.35"><animate attributeName="opacity" values="0.35;0;0.35" dur="3.2s" repeatCount="indefinite"/></circle>
+    <circle cx="600" cy="20" r="1.1" fill="#C9A96E" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="120" cy="130" r="1" fill="#C4A8D4" opacity="0.35"><animate attributeName="opacity" values="0.35;0.05;0.35" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="680" cy="200" r="1.2" fill="#6CCB4C" opacity="0.25"><animate attributeName="opacity" values="0.25;0;0.25" dur="3.8s" repeatCount="indefinite"/></circle>
+    <circle cx="280" cy="15" r="0.7" fill="#C94858" opacity="0.35"><animate attributeName="opacity" values="0.35;0;0.35" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="520" cy="55" r="0.8" fill="#C4A8D4" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="80" cy="50" r="0.6" fill="#C9A96E" opacity="0.25"><animate attributeName="opacity" values="0.25;0;0.25" dur="3.6s" repeatCount="indefinite"/></circle>
+    <circle cx="750" cy="150" r="0.9" fill="#8C6E9F" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="2.7s" repeatCount="indefinite"/></circle>
+    <circle cx="420" cy="180" r="0.7" fill="#6CCB4C" opacity="0.25"><animate attributeName="opacity" values="0.25;0;0.25" dur="4.5s" repeatCount="indefinite"/></circle>
 
-    <!-- 双扫描线 -->
-    <g opacity="0.015">
-      <line x1="0" y1="0" x2="800" y2="0" stroke="#B49BC4" stroke-width="0.8">
-        <animate attributeName="y1" values="0;200" dur="6s" repeatCount="indefinite"/>
-        <animate attributeName="y2" values="0;200" dur="6s" repeatCount="indefinite"/>
+    <!-- 扫描线 (更精致) -->
+    <g opacity="0.02">
+      <line x1="0" y1="0" x2="800" y2="0" stroke="#C4A8D4" stroke-width="0.6">
+        <animate attributeName="y1" values="0;200" dur="7s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="0;200" dur="7s" repeatCount="indefinite"/>
       </line>
-      <line x1="800" y1="100" x2="0" y2="100" stroke="#862C3B" stroke-width="0.5">
-        <animate attributeName="y1" values="200;0" dur="8s" repeatCount="indefinite"/>
-        <animate attributeName="y2" values="200;0" dur="8s" repeatCount="indefinite"/>
+      <line x1="800" y1="100" x2="0" y2="100" stroke="#862C3B" stroke-width="0.4">
+        <animate attributeName="y1" values="200;0" dur="9s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="200;0" dur="9s" repeatCount="indefinite"/>
       </line>
     </g>
 
-    <!-- 花簇装饰 (呼吸效果) -->
-    <g transform="translate(35, 195) scale(0.35)" opacity="0.1" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.1;0.17;0.1" dur="7s" repeatCount="indefinite"/>
-      <use href="#floretCluster"/><circle cx="0" cy="0" r="5" fill="#862C3B" opacity="0.5"/>
+    <!-- 风信子花簇装饰 (呼吸 + 旋转) -->
+    <g transform="translate(35, 195) scale(0.32)" opacity="0.12" filter="url(#glow-soft)">
+      <animate attributeName="opacity" values="0.12;0.18;0.12" dur="7s" repeatCount="indefinite"/>
+      <g><use href="#floretCluster"/><circle cx="0" cy="0" r="5" fill="#862C3B" opacity="0.5"/>
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="40s" repeatCount="indefinite"/>
+      </g>
     </g>
-    <g transform="translate(765, 25) scale(0.25)" opacity="0.08" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.08;0.14;0.08" dur="9s" repeatCount="indefinite"/>
-      <use href="#floretCluster"/><circle cx="0" cy="0" r="4" fill="#862C3B" opacity="0.4"/>
+    <g transform="translate(765, 25) scale(0.22)" opacity="0.1" filter="url(#glow-soft)">
+      <animate attributeName="opacity" values="0.1;0.15;0.1" dur="9s" repeatCount="indefinite"/>
+      <g><use href="#floretCluster"/><circle cx="0" cy="0" r="4" fill="#862C3B" opacity="0.4"/>
+        <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="50s" repeatCount="indefinite"/>
+      </g>
     </g>
-    <g transform="translate(670, 205) scale(0.12) rotate(-20)" opacity="0.07" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.07;0.12;0.07" dur="5.5s" repeatCount="indefinite"/>
+    <g transform="translate(670, 205) scale(0.1) rotate(-20)" opacity="0.08" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.08;0.13;0.08" dur="5.5s" repeatCount="indefinite"/>
       <use href="#floret" fill="url(#petalPurple)"/>
     </g>
-    <g transform="translate(150, 40) scale(0.1) rotate(30)" opacity="0.05" filter="url(#glow)">
-      <animate attributeName="opacity" values="0.05;0.09;0.05" dur="6.5s" repeatCount="indefinite"/>
+    <g transform="translate(150, 40) scale(0.09) rotate(30)" opacity="0.06" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.06;0.1;0.06" dur="6.5s" repeatCount="indefinite"/>
       <use href="#floret" fill="url(#petalCrimson)"/>
     </g>
 
     <!-- 荧光茎部装饰线 -->
-    <line x1="0" y1="200" x2="200" y2="200" stroke="url(#petalPurple)" stroke-width="0.6" opacity="0.08">
-      <animate attributeName="opacity" values="0.08;0.15;0.08" dur="5s" repeatCount="indefinite"/>
+    <line x1="0" y1="200" x2="200" y2="200" stroke="url(#petalPurple)" stroke-width="0.5" opacity="0.1">
+      <animate attributeName="opacity" values="0.1;0.18;0.1" dur="5s" repeatCount="indefinite"/>
     </line>
-    <line x1="600" y1="200" x2="800" y2="200" stroke="url(#petalCrimson)" stroke-width="0.6" opacity="0.06">
-      <animate attributeName="opacity" values="0.06;0.12;0.06" dur="6s" repeatCount="indefinite"/>
+    <line x1="600" y1="200" x2="800" y2="200" stroke="url(#petalCrimson)" stroke-width="0.5" opacity="0.08">
+      <animate attributeName="opacity" values="0.08;0.14;0.08" dur="6s" repeatCount="indefinite"/>
     </line>
 
     <!-- ============================================================ -->
-    <!-- 5-SLIDE CAROUSEL: 12s cycle, cross-fade, NO black gaps      -->
-    <!-- Pattern: each slide visible 2.0s, fade in/out 0.4s         -->
-    <!-- Overlap ensures at least one slide always visible            -->
+    <!-- 5-SLIDE CAROUSEL: 12s cycle, 0.4s cross-fade, NO black gaps  -->
     <!-- ============================================================ -->
 
-    <!-- SLIDE 1: BRAND (0.0-2.4s visible, wrap 10.0-12.0s) -->
+    <!-- SLIDE 1: BRAND (0.0-2.4s, wrap 10.0-12.0s) -->
     <g opacity="0">
       <animate attributeName="opacity" values="1;1;0;0;0;1" keyTimes="0;0.167;0.2;0.833;0.867;1" dur="12s" repeatCount="indefinite"/>
 
-      <text x="400" y="70" text-anchor="middle" font-family="'Courier New',monospace" font-size="52" font-weight="bold" fill="url(#titleGrad)" filter="url(#glow-strong)">HOS</text>
-      <text x="400" y="96" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#8C6E9F" letter-spacing="5" opacity="0.8">HYACINTH OF SECURITY</text>
-      <rect x="310" y="106" width="180" height="1" rx="0.5" fill="url(#sepGrad)"/>
-      <text x="400" y="132" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#B49BC4" opacity="0.75">AI × Cybersecurity Practitioner</text>
-      <text x="400" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#5A5A5A">Qian Jiahong · Shanghai, China</text>
-      <rect x="468" y="146" width="7" height="15" rx="1" fill="#862C3B" opacity="0.7"><animate attributeName="opacity" values="0.9;0;0.9" dur="1.2s" repeatCount="indefinite"/></rect>
-      <g transform="translate(400,185) scale(0.3)" opacity="0.08" filter="url(#glow)"><use href="#floretCluster"/></g>
+      <text x="400" y="68" text-anchor="middle" font-family="'Courier New',monospace" font-size="54" font-weight="bold" fill="url(#titleGrad)" filter="url(#glow-strong)">HOS</text>
+      <text x="400" y="94" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8C6E9F" letter-spacing="6" opacity="0.85">HYACINTH OF SECURITY</text>
+      <rect x="310" y="104" width="180" height="1" rx="0.5" fill="url(#sepGrad)"/>
+      <text x="400" y="130" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#C4A8D4" opacity="0.8">AI x Cybersecurity Practitioner</text>
+      <text x="400" y="156" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#6A6A6A">Qian Jiahong - Shanghai, China</text>
+      <rect x="470" y="144" width="7" height="15" rx="1" fill="#862C3B" opacity="0.7"><animate attributeName="opacity" values="0.9;0;0.9" dur="1.2s" repeatCount="indefinite"/></rect>
+      <g transform="translate(400,185) scale(0.28)" opacity="0.1" filter="url(#glow-soft)">
+        <use href="#floretCluster"/>
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="60s" repeatCount="indefinite" additive="sum"/>
+      </g>
     </g>
 
-    <!-- SLIDE 2: LIVE STATS (2.0-4.4s) -->
+    <!-- SLIDE 2: LIVE STATS (2.0-4.4s) - 玻璃拟态卡片 -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.167;0.2;0.333;0.367;1" dur="12s" repeatCount="indefinite"/>
 
-      <text x="400" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#8C6E9F" letter-spacing="5" opacity="0.5">LIVE STATS</text>
-      <rect x="345" y="46" width="110" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.3"/>
+      <text x="400" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#8C6E9F" letter-spacing="6" opacity="0.55">LIVE STATS</text>
+      <rect x="345" y="44" width="110" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
+
+      <!-- 玻璃卡片背景 -->
+      <rect x="95" y="56" width="130" height="68" rx="8" fill="#8C6E9F" fill-opacity="0.035" stroke="#B49BC4" stroke-opacity="0.08" stroke-width="0.5"/>
+      <rect x="255" y="56" width="130" height="68" rx="8" fill="#B49BC4" fill-opacity="0.035" stroke="#C4A8D4" stroke-opacity="0.08" stroke-width="0.5"/>
+      <rect x="415" y="56" width="130" height="68" rx="8" fill="#6CCB4C" fill-opacity="0.03" stroke="#6CCB4C" stroke-opacity="0.07" stroke-width="0.5"/>
+      <rect x="575" y="56" width="130" height="68" rx="8" fill="#C9A96E" fill-opacity="0.03" stroke="#C9A96E" stroke-opacity="0.07" stroke-width="0.5"/>
 
       <g text-anchor="middle">
-        <text id="stat-prs" x="160" y="95" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">17</text>
-        <text x="160" y="116" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">merged PRs</text>
+        <text id="stat-prs" x="160" y="93" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">17</text>
+        <text x="160" y="114" font-family="system-ui,sans-serif" font-size="9" fill="#6A6A6A">merged PRs</text>
       </g>
       <g text-anchor="middle">
-        <text id="stat-repos" x="320" y="95" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numPurple)" filter="url(#glow)">16</text>
-        <text x="320" y="116" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">repositories</text>
+        <text id="stat-repos" x="320" y="93" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numPurple)" filter="url(#glow)">16</text>
+        <text x="320" y="114" font-family="system-ui,sans-serif" font-size="9" fill="#6A6A6A">repositories</text>
       </g>
       <g text-anchor="middle">
-        <text id="stat-stars" x="480" y="95" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numGreen)" filter="url(#glow)">24</text>
-        <text x="480" y="116" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">total stars</text>
+        <text id="stat-stars" x="480" y="93" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numGreen)" filter="url(#glow)">24</text>
+        <text x="480" y="114" font-family="system-ui,sans-serif" font-size="9" fill="#6A6A6A">total stars</text>
       </g>
       <g text-anchor="middle">
-        <text id="stat-followers" x="640" y="95" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numGold)" filter="url(#glow)">34</text>
-        <text x="640" y="116" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A">followers</text>
+        <text id="stat-followers" x="640" y="93" font-family="'Courier New',monospace" font-size="32" font-weight="bold" fill="url(#numGold)" filter="url(#glow)">34</text>
+        <text x="640" y="114" font-family="system-ui,sans-serif" font-size="9" fill="#6A6A6A">followers</text>
       </g>
 
-      <text x="400" y="165" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#3B3D38" opacity="0.45">1,467 articles · 7 PyPI packages · 1,007 commits/yr</text>
-      <text x="400" y="185" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#2D2D2D">auto-synced daily via GitHub Actions</text>
+      <text x="400" y="155" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#4A4A4A" opacity="0.5">1,467 articles - 7 PyPI packages - 1,007 commits/yr</text>
+      <text x="400" y="178" text-anchor="middle" font-family="system-ui,sans-serif" font-size="7.5" fill="#3A3A3A">auto-synced daily via GitHub Actions</text>
     </g>
 
     <!-- SLIDE 3: FLAGSHIP HOS-LS (4.0-6.4s) -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.333;0.367;0.5;0.533;1" dur="12s" repeatCount="indefinite"/>
 
-      <text x="400" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#862C3B" letter-spacing="5" opacity="0.5">FLAGSHIP PROJECT</text>
-      <rect x="320" y="46" width="160" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.3"/>
+      <text x="400" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#862C3B" letter-spacing="6" opacity="0.55">FLAGSHIP PROJECT</text>
+      <rect x="320" y="44" width="160" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
 
-      <text x="400" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="24" font-weight="bold" fill="#e0e0e0" filter="url(#glow)">HOS-LS</text>
-      <text x="400" y="105" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8C6E9F" opacity="0.65">AI-driven Code Security Analysis &amp; Attack Chain Reasoning</text>
+      <!-- 项目卡片背景 -->
+      <rect x="120" y="56" width="560" height="100" rx="8" fill="#862C3B" fill-opacity="0.025" stroke="#862C3B" stroke-opacity="0.06" stroke-width="0.5"/>
 
-      <g font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A" text-anchor="middle">
-        <text x="175" y="135">🧠 AI Semantic Analysis</text>
-        <text x="335" y="135">⛓️ Attack Chain Engine</text>
-        <text x="495" y="135">🤖 Multi-Agent Architecture</text>
-        <text x="655" y="135">💉 Exploit Generation</text>
+      <text x="400" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="26" font-weight="bold" fill="#e8e8e8" filter="url(#glow)">HOS-LS</text>
+      <text x="400" y="105" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8C6E9F" opacity="0.7">AI-driven Code Security Analysis &amp; Attack Chain Reasoning</text>
+
+      <g font-family="system-ui,sans-serif" font-size="9" fill="#7A7A7A" text-anchor="middle">
+        <text x="200" y="135">AI Semantic Analysis</text>
+        <text x="340" y="135">Attack Chain Engine</text>
+        <text x="480" y="135">Multi-Agent Architecture</text>
+        <text x="620" y="135">Exploit Generation</text>
       </g>
 
-      <rect x="100" y="150" width="600" height="0.5" fill="url(#sepGrad)" opacity="0.15"/>
-      <text x="400" y="175" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#3B3D38" opacity="0.35">Beyond Regex · End-to-end Attack Path Reasoning · Auto Verification</text>
-      <text x="400" y="190" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#862C3B" opacity="0.35">github.com/lxcxjxhx/HOS-LS</text>
+      <!-- 特性分隔点 -->
+      <g fill="#862C3B" opacity="0.3">
+        <circle cx="270" cy="132" r="1"/><circle cx="410" cy="132" r="1"/><circle cx="550" cy="132" r="1"/>
+      </g>
+
+      <text x="400" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#4A4A4A" opacity="0.4">Beyond Regex - End-to-end Attack Path Reasoning - Auto Verification</text>
+      <text x="400" y="180" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#862C3B" opacity="0.4">github.com/lxcxjxhx/HOS-LS</text>
     </g>
 
-    <!-- SLIDE 4: HIGHLIGHTS (6.0-8.4s) -->
+    <!-- SLIDE 4: HIGHLIGHTS (6.0-8.4s) - 玻璃卡片 -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.533;0.667;0.7;1" dur="12s" repeatCount="indefinite"/>
 
-      <text x="400" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#C9A96E" letter-spacing="5" opacity="0.5">HIGHLIGHTS</text>
-      <rect x="330" y="46" width="140" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.3"/>
+      <text x="400" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#C9A96E" letter-spacing="6" opacity="0.55">HIGHLIGHTS</text>
+      <rect x="330" y="44" width="140" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
+
+      <!-- 奖项卡片 -->
+      <rect x="115" y="56" width="210" height="52" rx="8" fill="#C9A96E" fill-opacity="0.035" stroke="#C9A96E" stroke-opacity="0.08" stroke-width="0.5"/>
+      <rect x="295" y="56" width="210" height="52" rx="8" fill="#B49BC4" fill-opacity="0.035" stroke="#C4A8D4" stroke-opacity="0.08" stroke-width="0.5"/>
+      <rect x="475" y="56" width="210" height="52" rx="8" fill="#6CCB4C" fill-opacity="0.03" stroke="#6CCB4C" stroke-opacity="0.07" stroke-width="0.5"/>
 
       <g text-anchor="middle">
-        <text x="230" y="78" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#C9A96E">🏆 中美创客特等奖</text>
-        <text x="230" y="95" font-family="system-ui,sans-serif" font-size="8" fill="#5A5A5A">China-US Youth Maker Grand Prize</text>
+        <text x="220" y="78" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#C9A96E">China-US Maker Grand Prize</text>
+        <text x="220" y="95" font-family="system-ui,sans-serif" font-size="8" fill="#6A6A6A">National Top Award - Innovation</text>
       </g>
       <g text-anchor="middle">
-        <text x="400" y="78" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#B49BC4">📜 CSDN Expert Blogger</text>
-        <text x="400" y="95" font-family="system-ui,sans-serif" font-size="8" fill="#5A5A5A">1,467 articles · 1.2M+ views · 12+ columns</text>
+        <text x="400" y="78" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#C4A8D4">CSDN Expert Blogger</text>
+        <text x="400" y="95" font-family="system-ui,sans-serif" font-size="8" fill="#6A6A6A">1,467 articles - 1.2M+ views</text>
       </g>
       <g text-anchor="middle">
-        <text x="570" y="78" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#6CCB4C">🔑 Intel AI Competition</text>
-        <text x="570" y="95" font-family="system-ui,sans-serif" font-size="8" fill="#5A5A5A">AI + Threat Detection Innovation</text>
+        <text x="580" y="78" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#6CCB4C">Intel AI Competition</text>
+        <text x="580" y="95" font-family="system-ui,sans-serif" font-size="8" fill="#6A6A6A">AI + Threat Detection</text>
       </g>
 
-      <text x="400" y="128" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#3B3D38" opacity="0.4">Aliyun Expert · Huawei Expert · Tencent Star · Security Emergency Response · CET-6</text>
-      <text x="400" y="148" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8" fill="#2D2D2D">Neo4j Certified · HF Agent · MCP · 7 PyPI packages · Hugging Face Models</text>
+      <!-- 认证列表 -->
+      <text x="400" y="128" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#5A5A5A" opacity="0.45">Aliyun Expert - Huawei Expert - Tencent Star - Security Emergency Response - CET-6</text>
+      <text x="400" y="146" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#4A4A4A" opacity="0.4">Neo4j Certified - HF Agent - MCP - 7 PyPI packages - Hugging Face Models</text>
 
-      <rect x="250" y="165" width="300" height="0.5" fill="url(#sepGrad)" opacity="0.15"/>
-      <text x="400" y="185" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#5A5A5A">1,467+ original articles · 7 PyPI packages · 1,007 commits in 2025</text>
+      <rect x="250" y="160" width="300" height="0.5" fill="url(#sepGrad)" opacity="0.2"/>
+      <text x="400" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#6A6A6A">1,467+ original articles - 7 PyPI packages - 1,007 commits in 2025</text>
     </g>
 
     <!-- SLIDE 5: TECH & CONTACT (8.0-10.4s) -->
     <g opacity="0">
       <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.667;0.7;0.833;0.867;1" dur="12s" repeatCount="indefinite"/>
 
-      <text x="400" y="38" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#B49BC4" letter-spacing="5" opacity="0.5">TECH STACK &amp; CONTACT</text>
-      <rect x="300" y="46" width="200" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.3"/>
+      <text x="400" y="36" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#B49BC4" letter-spacing="6" opacity="0.55">TECH STACK &amp; CONTACT</text>
+      <rect x="300" y="44" width="200" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
 
-      <text x="400" y="78" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#B49BC4" opacity="0.7" letter-spacing="2">Python · PyTorch · LangChain · FastAPI · Docker · vLLM</text>
-      <text x="400" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6CCB4C" opacity="0.6" letter-spacing="2">Neo4j · React · Triton · QLoRA · RAG · Multi-Agent</text>
-      <text x="400" y="122" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#C9A96E" opacity="0.5" letter-spacing="2">CTF · Exploit Dev · MCP · GitHub Actions · CI/CD</text>
+      <!-- 技术栈分类行 -->
+      <text x="400" y="76" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#C4A8D4" opacity="0.75" letter-spacing="1.5">Python - PyTorch - LangChain - FastAPI - Docker - vLLM</text>
+      <text x="400" y="98" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#6CCB4C" opacity="0.65" letter-spacing="1.5">Neo4j - React - Triton - QLoRA - RAG - Multi-Agent</text>
+      <text x="400" y="120" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#C9A96E" opacity="0.55" letter-spacing="1.5">CTF - Exploit Dev - MCP - GitHub Actions - CI/CD</text>
 
-      <rect x="250" y="138" width="300" height="0.5" fill="url(#sepGrad)" opacity="0.15"/>
+      <rect x="250" y="136" width="300" height="0.5" fill="url(#sepGrad)" opacity="0.2"/>
 
-      <text x="400" y="162" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#5A5A5A">17 merged PRs · triton · pytorch · garak · flash-attn · liger-kernel · pydantic-ai</text>
+      <text x="400" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#6A6A6A">17 merged PRs - triton - pytorch - garak - flash-attn - liger-kernel - pydantic-ai</text>
 
-      <text x="400" y="185" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#3B3D38" opacity="0.4">✉ aqfxz_zh@qq.com · github.com/lxcxjxhx · security-hyacinth.blog.csdn.net</text>
+      <text x="400" y="180" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#5A5A5A" opacity="0.45">aqfxz_zh@qq.com - github.com/lxcxjxhx - security-hyacinth.blog.csdn.net</text>
     </g>
 
-    <!-- ============ 装饰边框 (始终可见) ============ -->
-    <path d="M0,8 Q0,0 8,0" fill="none" stroke="#8C6E9F" stroke-width="0.35" opacity="0.15"/>
-    <path d="M800,8 Q800,0 792,0" fill="none" stroke="#862C3B" stroke-width="0.35" opacity="0.15"/>
-    <path d="M0,192 Q0,200 8,200" fill="none" stroke="#862C3B" stroke-width="0.35" opacity="0.15"/>
-    <path d="M800,192 Q800,200 792,200" fill="none" stroke="#8C6E9F" stroke-width="0.35" opacity="0.15"/>
-    <rect x="0" y="0" width="800" height="200" rx="12" fill="none" stroke="#8C6E9F" stroke-width="0.2" opacity="0.08"/>
+    <!-- ============ 进度指示器 (5个点) ============ -->
+    <g>
+      <circle cx="370" cy="194" r="2" fill="url(#dotPurple)" opacity="0.15">
+        <animate attributeName="opacity" values="0.85;0.85;0.15;0.15;0.15;0.85" keyTimes="0;0.167;0.2;0.833;0.867;1" dur="12s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="3.5;3.5;2;2;2;3.5" keyTimes="0;0.167;0.2;0.833;0.867;1" dur="12s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="385" cy="194" r="2" fill="url(#dotCrimson)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.15;0.85;0.85;0.15;0.15" keyTimes="0;0.167;0.2;0.333;0.367;1" dur="12s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;2;3.5;3.5;2;2" keyTimes="0;0.167;0.2;0.333;0.367;1" dur="12s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="400" cy="194" r="2" fill="url(#dotDark)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.15;0.85;0.85;0.15;0.15" keyTimes="0;0.333;0.367;0.5;0.533;1" dur="12s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;2;3.5;3.5;2;2" keyTimes="0;0.333;0.367;0.5;0.533;1" dur="12s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="415" cy="194" r="2" fill="url(#dotGold)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.15;0.85;0.85;0.15;0.15" keyTimes="0;0.5;0.533;0.667;0.7;1" dur="12s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;2;3.5;3.5;2;2" keyTimes="0;0.5;0.533;0.667;0.7;1" dur="12s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="430" cy="194" r="2" fill="url(#dotGreen)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.15;0.85;0.85;0.15;0.15" keyTimes="0;0.667;0.7;0.833;0.867;1" dur="12s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;2;3.5;3.5;2;2" keyTimes="0;0.667;0.7;0.833;0.867;1" dur="12s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- ============ 暗角与边框 (始终可见) ============ -->
+    <rect width="800" height="200" fill="url(#vignette)" rx="12" pointer-events="none"/>
+    <rect x="0" y="0" width="800" height="200" rx="12" fill="none" stroke="#8C6E9F" stroke-width="0.2" opacity="0.1"/>
+    <path d="M0,8 Q0,0 8,0" fill="none" stroke="#8C6E9F" stroke-width="0.4" opacity="0.2"/>
+    <path d="M800,8 Q800,0 792,0" fill="none" stroke="#862C3B" stroke-width="0.4" opacity="0.2"/>
+    <path d="M0,192 Q0,200 8,200" fill="none" stroke="#862C3B" stroke-width="0.4" opacity="0.2"/>
+    <path d="M800,192 Q800,200 792,200" fill="none" stroke="#8C6E9F" stroke-width="0.4" opacity="0.2"/>
   </g>
 </svg>
