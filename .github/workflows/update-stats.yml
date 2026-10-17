@@ -20,14 +20,14 @@ jobs:
         run: |
           mkdir -p stats
 
-          # Merged PRs - with error handling
+          # Merged PRs
           PRS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/search/issues?q=author:lxcxjxhx+type:pr+is:merged" | \
             jq -r '.total_count // 0')
           echo "Fetched PRS: $PRS"
           echo "{\"schemaVersion\":1,\"label\":\"merged PRs\",\"message\":\"$PRS\",\"color\":\"f38ba8\"}" > stats/prs.json
 
-          # Public repositories - with error handling
+          # Public repositories
           REPOS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/users/lxcxjxhx" | \
             jq -r '.public_repos // 0')
@@ -45,18 +45,26 @@ jobs:
           echo "Fetched STARS: $STARS"
           echo "{\"schemaVersion\":1,\"label\":\"total stars\",\"message\":\"$STARS\",\"color\":\"94e2d5\"}" > stats/stars.json
 
-          # Followers - with error handling
+          # Followers
           FOLL=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/users/lxcxjxhx" | \
             jq -r '.followers // 0')
           echo "Fetched FOLLOWERS: $FOLL"
           echo "{\"schemaVersion\":1,\"label\":\"followers\",\"message\":\"$FOLL\",\"color\":\"f9e2af\"}" > stats/followers.json
 
+          # Annual commits (calendar year, via public contributions API)
+          YEAR=$(date -u '+%Y')
+          COMMITS=$(curl -s "https://github-contributions-api.jogruber.de/v4/lxcxjxhx" | \
+            jq -r --arg y "$YEAR" '[.contributions[]? | select(.date | startswith($y)) | .count] | add // 0')
+          echo "Fetched COMMITS: $COMMITS"
+          echo "{\"schemaVersion\":1,\"label\":\"commits this year\",\"message\":\"$COMMITS\",\"color\":\"7cd9e8\"}" > stats/commits.json
+
           # Export for next step
           echo "PRS=$PRS" >> $GITHUB_ENV
           echo "REPOS=$REPOS" >> $GITHUB_ENV
           echo "STARS=$STARS" >> $GITHUB_ENV
           echo "FOLLOWERS=$FOLL" >> $GITHUB_ENV
+          echo "COMMITS=$COMMITS" >> $GITHUB_ENV
 
       - name: Inject stats into SVG
         run: |
@@ -64,16 +72,17 @@ jobs:
           REPOS="${{ env.REPOS }}"
           STARS="${{ env.STARS }}"
           FOLLOWERS="${{ env.FOLLOWERS }}"
+          COMMITS="${{ env.COMMITS }}"
 
-          echo "Injecting: PRS=$PRS REPOS=$REPOS STARS=$STARS FOLLOWERS=$FOLLOWERS"
+          echo "Injecting: PRS=$PRS REPOS=$REPOS STARS=$STARS FOLLOWERS=$FOLLOWERS COMMITS=$COMMITS"
 
-          # Use perl with explicit error checking
-          export PRS REPOS STARS FOLLOWERS
+          export PRS REPOS STARS FOLLOWERS COMMITS
 
           perl -i -pe 's/(<text id="stat-prs"[^>]*>)[^<]*(<\/text>)/$1$ENV{PRS}$2/g' profile-anim.svg
           perl -i -pe 's/(<text id="stat-repos"[^>]*>)[^<]*(<\/text>)/$1$ENV{REPOS}$2/g' profile-anim.svg
           perl -i -pe 's/(<text id="stat-stars"[^>]*>)[^<]*(<\/text>)/$1$ENV{STARS}$2/g' profile-anim.svg
           perl -i -pe 's/(<text id="stat-followers"[^>]*>)[^<]*(<\/text>)/$1$ENV{FOLLOWERS}$2/g' profile-anim.svg
+          perl -i -pe 's/(<text id="stat-commits"[^>]*>)[^<]*(<\/text>)/$1$ENV{COMMITS}$2/g' profile-anim.svg
 
           # Verify injection succeeded
           echo "=== Verification ==="
@@ -81,6 +90,7 @@ jobs:
           grep 'stat-repos' profile-anim.svg
           grep 'stat-stars' profile-anim.svg
           grep 'stat-followers' profile-anim.svg
+          grep 'stat-commits' profile-anim.svg
 
           # Check if any value is empty or null
           if grep -q 'stat-prs">[[:space:]]*<' profile-anim.svg || \
@@ -98,7 +108,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: update stats [skip ci]"
-            # Use force-with-lease to handle any remote changes safely
             git push --force-with-lease || {
               echo "Push failed, pulling and retrying..."
               git pull --rebase origin main
