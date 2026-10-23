@@ -206,16 +206,16 @@
         <rect x="482" y="54" width="170" height="64" rx="9" fill="#3E8A2C" fill-opacity="0.04" stroke="#8DF06A" stroke-opacity="0.12" stroke-width="0.6"/>
         <rect x="682" y="54" width="136" height="64" rx="9" fill="#96763F" fill-opacity="0.04" stroke="#EBC690" stroke-opacity="0.12" stroke-width="0.6"/>
 
-        <text id="stat-prs" x="167" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">226</text>
+        <text id="stat-prs" x="167" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">235</text>
         <text x="167" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">merged PRs</text>
 
         <text id="stat-repos" x="367" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numPurple)" filter="url(#glow)">34</text>
         <text x="367" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">repositories</text>
 
-        <text id="stat-stars" x="567" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGreen)" filter="url(#glow)">70</text>
+        <text id="stat-stars" x="567" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGreen)" filter="url(#glow)">69</text>
         <text x="567" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">total stars</text>
 
-        <text id="stat-followers" x="750" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGold)" filter="url(#glow)">40</text>
+        <text id="stat-followers" x="750" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGold)" filter="url(#glow)">39</text>
         <text x="750" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">followers</text>
 
         <!-- 迷你趋势条（静态比例示意，Actions 可注入 width） -->
@@ -238,7 +238,7 @@
           <text x="342" y="169" text-anchor="end">40</text>
           <text x="342" y="177" text-anchor="end">1007</text>
         </g>
-        <text id="stat-commits" x="360" y="177" font-family="'Courier New',monospace" font-size="0.1" fill="#7CD9E8" opacity="0.01">2236</text>
+        <text id="stat-commits" x="360" y="177" font-family="'Courier New',monospace" font-size="0.1" fill="#7CD9E8" opacity="0.01">2253</text>
       </g>
 
       <text x="470" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#6A6660" opacity="0.8">annual commits <tspan fill="#7CD9E8">1,007</tspan> · 7 PyPI packages · 1,467 articles</text>
