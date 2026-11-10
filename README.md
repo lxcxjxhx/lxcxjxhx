@@ -13,9 +13,9 @@ including `pipecat-ai/pipecat` (12), `labring/FastGPT` (5), `pytorch/torchtitan`
 
 | | |
 |---|---|
-| Every number above is generated from a ledger and reconciled against the GitHub API | 258 tracked items |
-| The defect classes are toolable, and the tools ship their false-positive cases as tests | 32 checkers, 5 with self-test |
-| I close my own PRs when the evidence goes against them | 13 self-closed, each with the reason in the thread |
+| Every number above is generated from a ledger and reconciled against the GitHub API | 268 tracked items |
+| The defect classes are toolable, and the tools ship their false-positive cases as tests | 87 tools, 32 with self-test |
+| I close my own PRs when the evidence goes against them | 43 self-closed, each with the reason in the thread |
 
 #### What I work on
 
