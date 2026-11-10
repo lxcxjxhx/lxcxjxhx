@@ -7,7 +7,7 @@
 I find and fix defects in the tooling that agents run on — doc/contract drift, dead
 configuration, links that go nowhere — and I prove each one is real before opening a PR.
 
-**38 merged pull requests across 15 upstream repositories** (2026-10 → 2026-11),
+**39 merged pull requests across 15 upstream repositories** (2026-10 → 2026-11),
 including `pipecat-ai/pipecat` (12), `labring/FastGPT` (5), `pytorch/torchtitan` (3),
 `vllm-project/llm-compressor` (3), `microsoft/agent-framework` (3).
 
@@ -35,4 +35,4 @@ including `pipecat-ai/pipecat` (12), `labring/FastGPT` (5), `pytorch/torchtitan`
   sites instead, after a reviewer showed the formatter behaves the other way.
 - `harbor-framework/harbor#4195` — one value under two names, one of them unused.
 
-<sub>中文：做智能体运行时与工具链的安全工程。上游合并 38 条、覆盖 15 个仓库；每个结论都附可复核的方法，被证伪时主动撤回。</sub>
+<sub>中文：做智能体运行时与工具链的安全工程。上游合并 39 条、覆盖 15 个仓库；每个结论都附可复核的方法，被证伪时主动撤回。</sub>
