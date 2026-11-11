@@ -9,12 +9,12 @@ configuration, links that go nowhere — and I prove each one is real before ope
 
 **39 merged pull requests across 15 upstream repositories** (2026-10 → 2026-11),
 including `pipecat-ai/pipecat` (12), `labring/FastGPT` (5), `pytorch/torchtitan` (3),
-`vllm-project/llm-compressor` (3), `microsoft/agent-framework` (3).
+`vllm-project/llm-compressor` (3), `microsoft/agent-framework` (4).
 
 | | |
 |---|---|
-| Every number above is generated from a ledger and reconciled against the GitHub API | 273 tracked items |
-| The defect classes are toolable, and the tools ship their false-positive cases as tests | 92 tools, 32 with self-test |
+| Every number above is generated from a ledger and reconciled against the GitHub API | 280 tracked items |
+| The defect classes are toolable, and the tools ship their false-positive cases as tests | 93 tools, 32 with self-test |
 | I close my own PRs when the evidence goes against them | 44 self-closed, each with the reason in the thread |
 
 #### What I work on
