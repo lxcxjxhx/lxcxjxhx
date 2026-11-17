@@ -18,6 +18,14 @@ them in November), including `pipecat-ai/pipecat` (14), `microsoft/agent-framewo
 | The defect classes are toolable, and the tools ship their false-positive cases as tests | 32 checkers with self-tests, 178 scripts total |
 | I close my own PRs when the evidence goes against them | 62 stale PRs closed and archived in one pass, each with the patch kept |
 
+#### Tooling I maintain
+
+- **[`doc-drift`](https://github.com/lxcxjxhx/doc-drift)** — twelve stdlib-only checkers for
+  documentation that stopped being true (stale docstring parameters, `#fragment` links with no
+  heading, docs importing symbols the package dropped, bilingual pages that drifted apart).
+  Each one was validated by replaying merged documentation-fix PRs against the commit *before*
+  the fix; `run_all.py` runs the set against any tree and prints one table.
+
 #### What I work on
 
 - **Contract drift** — a docstring promising a parameter the signature dropped; a README
