@@ -15,7 +15,7 @@ them in November), including `pipecat-ai/pipecat` (14), `microsoft/agent-framewo
 | | |
 |---|---|
 | Every number here is generated from a ledger and reconciled against the GitHub API | `gh search prs --merged` |
-| The defect classes are toolable, and the tools ship their false-positive cases as tests | 32 checkers with self-tests, 178 scripts total |
+| The defect classes are toolable, and the tools ship their false-positive cases as tests | 32 checkers with self-tests, 185 scripts total |
 | I close my own PRs when the evidence goes against them | 62 stale PRs closed and archived in one pass, each with the patch kept |
 
 #### Tooling I maintain
