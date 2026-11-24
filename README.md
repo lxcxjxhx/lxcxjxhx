@@ -30,16 +30,17 @@ I look for the defects in the tooling agents run on, and I prove each one before
 |:--|:--|:--|
 | [`doc-drift` v0.1.0](https://github.com/lxcxjxhx/doc-drift/releases/tag/v0.1.0) | 14 stdlib-only checkers for docs that stopped being true. Every rule was validated on a real repo; the false-positive classes are written down with the repo that produced each. | `selftest ok ran=14` |
 | [`doc-drift` CI](https://github.com/lxcxjxhx/doc-drift/actions) | 3 operating systems × 2 Python versions, plus a step that fails the build if a checker imports a third-party package. | green badge |
-| [merged PRs](https://github.com/search?q=author%3Alxcxjxhx+type%3Apr+is%3Amerged+-user%3Alxcxjxhx&type=pullrequests) | 87 merges across 41 repositories I do not own, maintainer by maintainer, straight from GitHub search. | open, sort by repo |
+| [merged PRs](https://github.com/search?q=author%3Alxcxjxhx+type%3Apr+is%3Amerged+-user%3Alxcxjxhx&type=pullrequests) | Every merge into a repository I do not own — the count in the first badge, maintainer by maintainer, straight from GitHub search. | open, sort by repo |
 
 > **136 findings → 2 real, 134 changed the checker.** Six repos, three ecosystems. The one that
 > survived on the first pass is filed upstream
 > ([`llm-compressor#3526`](https://github.com/vllm-project/llm-compressor/pull/3526)). A rule that
 > only ever finds things is guessing.
 >
-> **Counts.** 504 merged PRs on this account; **87** of them landed in 41 repositories I do not own.
-> Both figures are generated from a ledger, reconciled against the GitHub API, and dated in the
-> commit that last touched `stats/`.
+> **Counts.** The first badge counts merges into repositories I do not own; the board's first figure
+> is every merged PR on this account, own repositories included. The gap between the two is the
+> point. Both come from the ledger, reconciled against the GitHub API, and dated in the commit that
+> last touched `stats/`.
 
 ### Recent
 
