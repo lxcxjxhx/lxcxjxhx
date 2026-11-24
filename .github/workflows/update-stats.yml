@@ -61,11 +61,25 @@ jobs:
             esac
           done
 
+          # Each step is its own shell; $GITHUB_ENV is the only channel across the boundary
+          {
+            echo "PRS=$PRS"
+            echo "REPOS=$REPOS"
+            echo "STARS=$STARS"
+            echo "FOLLOWERS=$FOLL"
+            echo "COMMITS=$COMMITS"
+          } >> "$GITHUB_ENV"
+
       - name: Inject stats into SVG
         run: |
-          echo "Injecting: PRS=$PRS REPOS=$REPOS STARS=$STARS FOLLOWERS=$FOLL COMMITS=$COMMITS"
+          set -euo pipefail
+          : "${PRS:?PRS missing -- the fetch step did not export it}"
+          : "${REPOS:?REPOS missing}"
+          : "${STARS:?STARS missing}"
+          : "${FOLLOWERS:?FOLLOWERS missing}"
+          : "${COMMITS:?COMMITS missing}"
 
-          export PRS REPOS STARS FOLLOWERS COMMITS
+          echo "Injecting: PRS=$PRS REPOS=$REPOS STARS=$STARS FOLLOWERS=$FOLLOWERS COMMITS=$COMMITS"
 
           perl -i -pe 's/(<text id="stat-prs"[^>]*>)[^<]*(<\/text>)/$1$ENV{PRS}$2/g' profile-anim.svg
           perl -i -pe 's/(<text id="stat-repos"[^>]*>)[^<]*(<\/text>)/$1$ENV{REPOS}$2/g' profile-anim.svg
