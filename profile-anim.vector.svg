@@ -1,0 +1,662 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" width="900" height="220">
+  <defs>
+    <!-- ============ 滤镜 ============ -->
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow-strong" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="glow-soft" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="bokeh-blur" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="20"/></filter>
+    <filter id="bokeh-sm" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="11"/></filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.62 0 0 0 0 0.5 0 0 0 0 0.7 0 0 0 0.022 0"/>
+    </filter>
+    <filter id="deepblur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="14"/></filter>
+
+    <!-- ============ 渐变 ============ -->
+    <radialGradient id="bgGrad" cx="42%" cy="30%" r="95%">
+      <stop offset="0%" stop-color="#141218"/><stop offset="45%" stop-color="#0B0A0D"/><stop offset="100%" stop-color="#040405"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="50%" r="72%">
+      <stop offset="58%" stop-color="#000000" stop-opacity="0"/><stop offset="100%" stop-color="#000000" stop-opacity="0.42"/>
+    </radialGradient>
+    <linearGradient id="petalPurple" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#D8C4E4"/><stop offset="40%" stop-color="#9A7BB0"/><stop offset="100%" stop-color="#331F3F"/>
+    </linearGradient>
+    <linearGradient id="petalCrimson" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#E06676"/><stop offset="45%" stop-color="#9A3242"/><stop offset="100%" stop-color="#41293F"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0%" stop-color="#F2EDE7"/><stop offset="48%" stop-color="#C4A8D4"/><stop offset="100%" stop-color="#E06676"/>
+    </linearGradient>
+    <linearGradient id="sepGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9A3242" stop-opacity="0"/><stop offset="50%" stop-color="#B49BC4" stop-opacity="0.55"/><stop offset="100%" stop-color="#9A3242" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="numRed" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#E4707F"/><stop offset="100%" stop-color="#93273A"/></radialGradient>
+    <radialGradient id="numGreen" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#8DF06A"/><stop offset="100%" stop-color="#3E8A2C"/></radialGradient>
+    <radialGradient id="numPurple" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#D8C4E4"/><stop offset="100%" stop-color="#8C6E9F"/></radialGradient>
+    <radialGradient id="numGold" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#EBC690"/><stop offset="100%" stop-color="#96763F"/></radialGradient>
+    <radialGradient id="numCyan" cx="50%" cy="35%" r="65%"><stop offset="0%" stop-color="#7CD9E8"/><stop offset="100%" stop-color="#2E7C8A"/></radialGradient>
+
+    <!-- 散景 -->
+    <radialGradient id="bk1"><stop offset="0%" stop-color="#9A7BB0" stop-opacity="0.15"/><stop offset="100%" stop-color="#9A7BB0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bk2"><stop offset="0%" stop-color="#9A3242" stop-opacity="0.11"/><stop offset="100%" stop-color="#9A3242" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bk3"><stop offset="0%" stop-color="#6CCB4C" stop-opacity="0.07"/><stop offset="100%" stop-color="#6CCB4C" stop-opacity="0"/></radialGradient>
+    <radialGradient id="bkGold"><stop offset="0%" stop-color="#C9A96E" stop-opacity="0.07"/><stop offset="100%" stop-color="#C9A96E" stop-opacity="0"/></radialGradient>
+
+    <!-- 数据条渐变 -->
+    <linearGradient id="barRed" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#E4707F" stop-opacity="0.9"/><stop offset="100%" stop-color="#93273A" stop-opacity="0.25"/></linearGradient>
+    <linearGradient id="barPurple" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D8C4E4" stop-opacity="0.9"/><stop offset="100%" stop-color="#8C6E9F" stop-opacity="0.25"/></linearGradient>
+    <linearGradient id="barGreen" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#8DF06A" stop-opacity="0.9"/><stop offset="100%" stop-color="#3E8A2C" stop-opacity="0.25"/></linearGradient>
+    <linearGradient id="barGold" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#EBC690" stop-opacity="0.9"/><stop offset="100%" stop-color="#96763F" stop-opacity="0.25"/></linearGradient>
+    <linearGradient id="barCyan" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7CD9E8" stop-opacity="0.9"/><stop offset="100%" stop-color="#2E7C8A" stop-opacity="0.25"/></linearGradient>
+
+    <!-- 风信子 -->
+    <path id="floret" d="M0,-18 C4,-18 8,-12 9,-4 C10,2 6,8 0,12 C-6,8 -10,2 -9,-4 C-8,-12 -4,-18 0,-18Z"/>
+    <g id="floretCluster">
+      <use href="#floret" fill="url(#petalPurple)" opacity="0.92"/>
+      <use href="#floret" fill="url(#petalCrimson)" opacity="0.86" transform="rotate(60)"/>
+      <use href="#floret" fill="url(#petalPurple)" opacity="0.92" transform="rotate(120)"/>
+      <use href="#floret" fill="url(#petalCrimson)" opacity="0.86" transform="rotate(180)"/>
+      <use href="#floret" fill="url(#petalPurple)" opacity="0.92" transform="rotate(240)"/>
+      <use href="#floret" fill="url(#petalCrimson)" opacity="0.86" transform="rotate(300)"/>
+    </g>
+    <clipPath id="clip"><rect width="900" height="220" rx="14"/></clipPath>
+    <linearGradient id="leftVeil" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#05060a" stop-opacity="0.72"/>
+      <stop offset="38%" stop-color="#05060a" stop-opacity="0.5"/>
+      <stop offset="68%" stop-color="#05060a" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#05060a" stop-opacity="0"/>
+    </linearGradient>
+
+    <linearGradient id="hy-bgV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#04050a"/>
+      <stop offset="48%" stop-color="#080a13"/>
+      <stop offset="80%" stop-color="#0a0911"/>
+      <stop offset="100%" stop-color="#040407"/>
+    </linearGradient>
+
+    <linearGradient id="hy-petalMetal" x1="0.12" y1="0" x2="0.86" y2="1">
+      <stop offset="0%" stop-color="#d3c4ff"/>
+      <stop offset="24%" stop-color="#a06bff"/>
+      <stop offset="56%" stop-color="#5b3399"/>
+      <stop offset="84%" stop-color="#221d33"/>
+      <stop offset="100%" stop-color="#0e0f15"/>
+    </linearGradient>
+    <linearGradient id="hy-petalMetalDim" x1="0.12" y1="0" x2="0.86" y2="1">
+      <stop offset="0%" stop-color="#7f6bbd"/>
+      <stop offset="40%" stop-color="#452a80"/>
+      <stop offset="100%" stop-color="#120e1a"/>
+    </linearGradient>
+    <linearGradient id="hy-petalEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f2e9ff" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#9b6bff" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#1c1526" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hy-stemMetal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#171922"/>
+      <stop offset="34%" stop-color="#6a6e80"/>
+      <stop offset="52%" stop-color="#dee3f0"/>
+      <stop offset="70%" stop-color="#464a58"/>
+      <stop offset="100%" stop-color="#10111a"/>
+    </linearGradient>
+    <linearGradient id="hy-copper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd39a"/>
+      <stop offset="48%" stop-color="#c8763a"/>
+      <stop offset="100%" stop-color="#5e2a12"/>
+    </linearGradient>
+    <linearGradient id="hy-rockV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#191a21"/>
+      <stop offset="38%" stop-color="#0c0d12"/>
+      <stop offset="100%" stop-color="#030305"/>
+    </linearGradient>
+
+    <radialGradient id="hy-ember" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffe0b0" stop-opacity="0.95"/>
+      <stop offset="32%" stop-color="#ff8a2b" stop-opacity="0.62"/>
+      <stop offset="66%" stop-color="#c33400" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#7a1200" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hy-coldFog" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#7c6ae8" stop-opacity="0.22"/>
+      <stop offset="52%" stop-color="#382a80" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#0a0a14" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hy-warmFog" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffb266" stop-opacity="0.20"/>
+      <stop offset="58%" stop-color="#8a3c00" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#0a0a14" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hy-heroHalo" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.26"/>
+      <stop offset="45%" stop-color="#4a2a86" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hy-vig" cx="0.5" cy="0.46" r="0.74">
+      <stop offset="52%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.76"/>
+    </radialGradient>
+
+    <filter id="hy-soft" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter>
+    <filter id="hy-fogBlur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="13"/></filter>
+    <filter id="hy-haloBlur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="hy-glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="1.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="hy-emberBlur" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="4.5"/></filter>
+    <filter id="hy-grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer>
+    </filter>
+
+    <!-- 单瓣：基点 0,0 向上 34 -->
+    <path id="hy-petal" d="M0 0 C -6.6 -12.4 -5.6 -26.2 0 -34 C 5.6 -26.2 6.6 -12.4 0 0 Z"/>
+    <!-- 一朵小花：中瓣 + 左右外翻 -->
+    <g id="hy-floret">
+      <use href="#hy-petal" fill="url(#hy-petalMetal)" stroke="url(#hy-petalEdge)" stroke-width="0.5"/>
+      <use href="#hy-petal" fill="url(#hy-petalMetalDim)" stroke="url(#hy-petalEdge)" stroke-width="0.45"
+           transform="rotate(-44) scale(0.88)"/>
+      <use href="#hy-petal" fill="url(#hy-petalMetalDim)" stroke="url(#hy-petalEdge)" stroke-width="0.45"
+           transform="rotate(44) scale(0.88)"/>
+      <circle cy="-1.4" r="1.05" fill="#15121f" stroke="#c9b8ff" stroke-opacity="0.5" stroke-width="0.35"/>
+    </g>
+
+    <clipPath id="hy-frame"><rect x="0" y="0" width="900" height="220" rx="10"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#clip)">
+    <!-- ============ 背景 ============ -->
+    <rect width="900" height="220" fill="url(#bgGrad)"/>
+
+    <!-- ============ 统一背景层：循环动图（背景视频，8s 无缝循环） ============ -->
+    <!-- 矢量背景层（无位图） -->
+<g transform="translate(62,-11) scale(1.06)">
+    <rect width="900" height="220" fill="url(#hy-bgV)"/>
+
+    <!-- 镜头层：缓推 -->
+    <g>
+      <animateTransform attributeName="transform" type="scale"
+        values="1;1.05;1" dur="40s" repeatCount="indefinite" calcMode="spline"
+        keySplines="0.42 0 0.58 1; 0.42 0 0.58 1" additive="sum"/>
+
+      <!-- 远景雾（慢层） -->
+      <g filter="url(#hy-fogBlur)" opacity="0.9">
+        <animateTransform attributeName="transform" type="translate"
+          values="14,0; -14,0; 14,0" dur="52s" repeatCount="indefinite"/>
+        <ellipse cx="300" cy="88" rx="190" ry="62" fill="url(#hy-coldFog)"/>
+        <ellipse cx="742" cy="118" rx="150" ry="58" fill="url(#hy-coldFog)" opacity="0.75"/>
+      </g>
+
+      <!-- 地下岩层 -->
+      <g>
+        <path d="M0 180 L0 220 L900 220 L900 182 C 812 175 771 186 706 181
+                 C 640 176 596 189 528 183 C 462 177 402 190 330 184
+                 C 258 178 196 190 128 183 C 76 178 34 184 0 180 Z"
+              fill="url(#hy-rockV)"/>
+        <path d="M0 180 L0 220 L900 220 L900 182 C 812 175 771 186 706 181
+                 C 640 176 596 189 528 183 C 462 177 402 190 330 184
+                 C 258 178 196 190 128 183 C 76 178 34 184 0 180 Z"
+              fill="none" stroke="#3b3f4d" stroke-opacity="0.5" stroke-width="0.8"/>
+        <g stroke="#2c2f3a" stroke-opacity="0.5" stroke-width="0.6" fill="none">
+          <animate attributeName="stroke-opacity" values="0.3;0.55;0.3" dur="9s" repeatCount="indefinite"/>
+          <path d="M0 191 C 120 185 210 197 330 191 C 452 185 540 198 660 191 C 770 185 840 194 900 189"/>
+          <path d="M0 206 C 96 201 190 211 300 206 C 420 200 520 212 640 206 C 760 200 830 208 900 203"/>
+        </g>
+        <!-- 裂纹 -->
+        <g fill="none" stroke="#ff7a1a" stroke-linecap="round" filter="url(#hy-glow)">
+          <animate attributeName="stroke-opacity" values="0.5;0.95;0.55;0.9;0.5" dur="3.6s" repeatCount="indefinite"/>
+          <path d="M620 186 L644 196 L638 208 L660 214" stroke-width="1.05"/>
+          <path d="M772 187 L794 197 L788 208 L808 214" stroke-width="0.85"/>
+          <path d="M586 182 L580 194 L594 204" stroke-width="0.75"/>
+          <path d="M828 183 L840 195 L834 206" stroke-width="0.7"/>
+        </g>
+        <g filter="url(#hy-emberBlur)">
+          <ellipse cx="706" cy="202" rx="54" ry="22" fill="url(#hy-ember)">
+            <animate attributeName="opacity" values="0.5;0.92;0.6;0.86;0.5" dur="3.6s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="796" cy="203" rx="30" ry="13" fill="url(#hy-ember)" opacity="0.45">
+            <animate attributeName="opacity" values="0.3;0.58;0.32;0.55;0.3" dur="4.4s" begin="0.6s" repeatCount="indefinite"/>
+          </ellipse>
+        </g>
+      </g>
+
+      <!-- 主体背光晕 -->
+      <ellipse cx="706" cy="120" rx="104" ry="118" fill="url(#hy-heroHalo)" filter="url(#hy-haloBlur)">
+        <animate attributeName="opacity" values="0.75;1;0.8;0.95;0.75" dur="7s" repeatCount="indefinite"/>
+      </ellipse>
+
+      <!-- ========== 风信子主体 ========== -->
+      <g transform="translate(706 0)">
+        <!-- 茎 -->
+        <rect x="-2.4" y="140" width="4.8" height="30" rx="2.4" fill="url(#hy-stemMetal)"/>
+        <path d="M-7 168 C 7 162 -7 156 7 150 C 7 150 -7 145 7 141"
+              fill="none" stroke="url(#hy-copper)" stroke-width="1.3" stroke-linecap="round" filter="url(#hy-glow)">
+          <animate attributeName="stroke-opacity" values="0.6;1;0.6" dur="5s" repeatCount="indefinite"/>
+        </path>
+
+        <!-- 花球：塔形 5 层 -->
+        <g>
+          <animateTransform attributeName="transform" type="rotate"
+            values="-0.8;0.8;-0.8" dur="11s" repeatCount="indefinite" additive="sum"/>
+
+          <g transform="translate(0 118)">
+            <use href="#hy-floret" transform="rotate(-160) scale(1.08)"/>
+            <use href="#hy-floret" transform="rotate(-120) scale(1.08)"/>
+            <use href="#hy-floret" transform="rotate(-80) scale(1.08)"/>
+            <use href="#hy-floret" transform="rotate(-40) scale(1.08)"/>
+            <use href="#hy-floret" transform="rotate(-200) scale(1.02)"/>
+            <use href="#hy-floret" transform="rotate(200) scale(1.02)"/>
+          </g>
+          <g transform="translate(0 99)">
+            <use href="#hy-floret" transform="rotate(-150) scale(1)"/>
+            <use href="#hy-floret" transform="rotate(-105) scale(1)"/>
+            <use href="#hy-floret" transform="rotate(-60) scale(1)"/>
+            <use href="#hy-floret" transform="rotate(-15) scale(1)"/>
+            <use href="#hy-floret" transform="rotate(-195) scale(0.94)"/>
+            <use href="#hy-floret" transform="rotate(195) scale(0.94)"/>
+          </g>
+          <g transform="translate(0 80)">
+            <use href="#hy-floret" transform="rotate(-165) scale(0.92)"/>
+            <use href="#hy-floret" transform="rotate(-115) scale(0.92)"/>
+            <use href="#hy-floret" transform="rotate(-65) scale(0.92)"/>
+            <use href="#hy-floret" transform="rotate(-15) scale(0.92)"/>
+            <use href="#hy-floret" transform="rotate(-215) scale(0.85)"/>
+          </g>
+          <g transform="translate(0 62)">
+            <use href="#hy-floret" transform="rotate(-160) scale(0.8)"/>
+            <use href="#hy-floret" transform="rotate(-100) scale(0.8)"/>
+            <use href="#hy-floret" transform="rotate(-40) scale(0.8)"/>
+            <use href="#hy-floret" transform="rotate(-210) scale(0.74)"/>
+          </g>
+          <g transform="translate(0 45)">
+            <use href="#hy-floret" transform="rotate(-155) scale(0.66)"/>
+            <use href="#hy-floret" transform="rotate(-85) scale(0.66)"/>
+            <use href="#hy-floret" transform="rotate(-15) scale(0.66)"/>
+            <use href="#hy-floret" transform="rotate(-225) scale(0.6)"/>
+          </g>
+        </g>
+
+        <!-- ========== 心之钢（钢心，一半埋进岩层） ========== -->
+        <g transform="translate(0 168)">
+          <animateTransform attributeName="transform" type="scale"
+            values="1;1;1.045;1;1" dur="3.6s" repeatCount="indefinite" additive="sum"/>
+          <!-- 钢壳 -->
+          <path d="M0 -13 C -11 -36 -40 -32 -40 -8 C -40 12 -19 26 0 37
+                   C 19 26 40 12 40 -8 C 40 -32 11 -36 0 -13 Z"
+                fill="#0f1118" stroke="#6a7082" stroke-width="2.2" stroke-opacity="0.95"/>
+          <!-- 熔光内核 -->
+          <path d="M0 -8 C -9 -28 -31 -25 -31 -7 C -31 9 -15 21 0 31
+                   C 15 21 31 9 31 -7 C 31 -25 9 -28 0 -8 Z"
+                fill="url(#hy-ember)" opacity="0.9" filter="url(#hy-emberBlur)">
+            <animate attributeName="opacity" values="0.55;0.95;0.62;0.88;0.55" dur="3.6s" repeatCount="indefinite"/>
+          </path>
+          <!-- 钢笼：心形内框 + 竖向筋 -->
+          <g fill="none" stroke="#8a92a4" stroke-width="0.75" stroke-opacity="0.75">
+            <path d="M0 -8 C -9 -28 -32 -25 -32 -6 C -32 10 -15 21 0 31
+                     C 15 21 32 10 32 -6 C 32 -25 9 -28 0 -8 Z"/>
+            <path d="M-22 -19 L -22 12 M-11 -27 L -11 27 M0 -30 L 0 34 M11 -27 L 11 27 M22 -19 L 22 12"/>
+          </g>
+          <!-- 齿轮组 -->
+          <g transform="translate(-14 -4)">
+            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="26s" repeatCount="indefinite"/>
+            <g fill="none" stroke="#9aa1b2" stroke-width="0.95">
+              <circle r="8.4"/><circle r="2.6"/>
+              <path d="M0 -8.4 L0 -11.2 M5.9 -5.9 L7.9 -7.9 M8.4 0 L11.2 0 M5.9 5.9 L7.9 7.9
+                       M0 8.4 L0 11.2 M-5.9 5.9 L-7.9 7.9 M-8.4 0 L-11.2 0 M-5.9 -5.9 L-7.9 -7.9"/>
+            </g>
+          </g>
+          <g transform="translate(16 6)">
+            <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="17s" repeatCount="indefinite"/>
+            <g fill="none" stroke="#b48a6c" stroke-width="1.05">
+              <circle r="6.2"/>
+              <path d="M0 -6.2 L0 -8.2 M4.4 -4.4 L5.8 -5.8 M6.2 0 L8.2 0 M4.4 4.4 L5.8 5.8
+                       M0 6.2 L0 8.2 M-4.4 4.4 L-5.8 5.8 M-6.2 0 L-8.2 0 M-4.4 -4.4 L-5.8 -5.8"/>
+            </g>
+          </g>
+          <!-- 铆钉 -->
+          <g fill="#c2c9d8">
+            <circle cx="-40" cy="-8" r="1.4"/><circle cx="40" cy="-8" r="1.4"/>
+            <circle cx="0" cy="-13" r="1.3"/><circle cx="-22" cy="12" r="1"/><circle cx="22" cy="12" r="1"/>
+          </g>
+          <!-- 机械根须 -->
+          <g stroke="url(#hy-copper)" stroke-width="1.05" fill="none" stroke-opacity="0.85">
+            <path d="M-28 20 C -40 28 -48 32 -60 36"/>
+            <path d="M28 20 C 40 28 48 32 60 36"/>
+            <path d="M0 34 L 0 44"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- 土层前缘：遮住心的下半，做出深扎效果 -->
+      <path d="M600 202 C 646 192 686 208 720 198 C 758 187 802 205 852 195 L852 220 L600 220 Z"
+            fill="#05060a"/>
+      <path d="M600 202 C 646 192 686 208 720 198 C 758 187 802 205 852 195"
+            fill="none" stroke="#ff7a1a" stroke-opacity="0.5" stroke-width="0.9" filter="url(#hy-glow)">
+        <animate attributeName="stroke-opacity" values="0.3;0.65;0.35;0.6;0.3" dur="3.6s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- 近景散景 -->
+      <g filter="url(#hy-soft)">
+        <animateTransform attributeName="transform" type="translate"
+          values="18,-7; -18,7; 18,-7" dur="28s" repeatCount="indefinite"/>
+        <circle cx="128" cy="168" r="15" fill="url(#hy-warmFog)" opacity="0.5"/>
+        <circle cx="312" cy="140" r="10" fill="url(#hy-coldFog)" opacity="0.8"/>
+        <circle cx="508" cy="182" r="18" fill="url(#hy-warmFog)" opacity="0.34"/>
+        <circle cx="850" cy="126" r="11" fill="url(#hy-coldFog)" opacity="0.6"/>
+        <circle cx="46" cy="98" r="8" fill="url(#hy-coldFog)" opacity="0.55"/>
+        <circle cx="612" cy="164" r="9" fill="url(#hy-warmFog)" opacity="0.4"/>
+      </g>
+
+      <!-- 星尘 -->
+      <g fill="#ded8ff">
+        <circle cx="668" cy="180" r="1" opacity="0.7">
+          <animate attributeName="cy" values="180;98;180" dur="13s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.85;0" dur="13s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="742" cy="190" r="0.8" opacity="0.6">
+          <animate attributeName="cy" values="190;112;190" dur="17s" begin="2s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.7;0" dur="17s" begin="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="782" cy="184" r="1.1" opacity="0.6">
+          <animate attributeName="cy" values="184;76;184" dur="21s" begin="5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.6;0" dur="21s" begin="5s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="636" cy="192" r="0.9" opacity="0.5">
+          <animate attributeName="cy" values="192;132;192" dur="15s" begin="1s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.55;0" dur="15s" begin="1s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="286" cy="184" r="0.8" opacity="0.45">
+          <animate attributeName="cy" values="184;122;184" dur="19s" begin="3.4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.5;0" dur="19s" begin="3.4s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="104" cy="192" r="0.8" opacity="0.4">
+          <animate attributeName="cy" values="192;142;192" dur="23s" begin="6s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.45;0" dur="23s" begin="6s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="806" cy="196" r="0.7" opacity="0.5">
+          <animate attributeName="cy" values="196;150;196" dur="11s" begin="0.8s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0;0.6;0" dur="11s" begin="0.8s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+
+      <!-- 扫描线 -->
+      <rect x="0" y="-2" width="900" height="2" fill="#a99cff" opacity="0.05">
+        <animate attributeName="y" values="-2;220" dur="9s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0;0.07;0" dur="9s" repeatCount="indefinite"/>
+      </rect>
+    </g>
+      </g>
+
+    <!-- ============ 屏色调 overlay（替代原 4 张定制底图） ============ -->
+    <!-- S1 brand -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;0.9;0.9;0;0" keyTimes="0;0.015;0.05;0.19;0.235;1" dur="24s" repeatCount="indefinite"/>
+      <rect width="900" height="220" fill="#6d5bd8" fill-opacity="0.16" style="mix-blend-mode:screen"/>
+    </g>
+    <!-- S2 board -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;0.85;0.85;0;0" keyTimes="0;0.25;0.285;0.42;0.465;1" dur="24s" repeatCount="indefinite"/>
+      <rect width="900" height="220" fill="#2a6fd8" fill-opacity="0.13" style="mix-blend-mode:screen"/>
+    </g>
+    <!-- S3 flagship -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;0.88;0.88;0;0" keyTimes="0;0.48;0.515;0.65;0.695;1" dur="24s" repeatCount="indefinite"/>
+      <rect width="900" height="220" fill="#d8452a" fill-opacity="0.15" style="mix-blend-mode:screen"/>
+    </g>
+    <!-- S4 contact -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;0.85;0.85;0;0" keyTimes="0;0.71;0.745;0.94;0.985;1" dur="24s" repeatCount="indefinite"/>
+      <rect width="900" height="220" fill="#d8a03a" fill-opacity="0.14" style="mix-blend-mode:screen"/>
+    </g>
+    
+
+
+    
+    
+    <!-- 左向压暗：保住文字区的对比度 -->
+    <rect width="900" height="220" fill="url(#leftVeil)"/>
+
+    <!-- 右侧 AI 生成氛围光斑（呼应 hero-banner 的粒子风信子） -->
+    <ellipse cx="838" cy="112" rx="130" ry="98" fill="url(#bk2)" filter="url(#deepblur)"/>
+    <ellipse cx="860" cy="70" rx="70" ry="55" fill="url(#bk1)" filter="url(#deepblur)"/>
+
+    <!-- ============ 散景（10） ============ -->
+    <circle cx="95" cy="55" r="80" fill="url(#bk1)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="95;185;55;115;95" dur="19s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="55;28;85;45;55" dur="15s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="760" cy="180" r="88" fill="url(#bk2)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="760;665;820;720;760" dur="21s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="180;150;195;165;180" dur="17s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="420" cy="26" r="55" fill="url(#bk3)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="420;495;355;435;420" dur="18s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="26;46;16;36;26" dur="12s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="845" cy="34" r="42" fill="url(#bk1)" filter="url(#bokeh-sm)">
+      <animate attributeName="cy" values="34;72;18;56;34" dur="13s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="46" cy="188" r="60" fill="url(#bk2)" filter="url(#bokeh-sm)">
+      <animate attributeName="cx" values="46;84;30;66;46" dur="15s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="580" cy="200" r="70" fill="url(#bk1)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="580;515;635;560;580" dur="22s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="118" r="46" fill="url(#bk3)" filter="url(#bokeh-sm)">
+      <animate attributeName="cy" values="118;90;136;108;118" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="205" cy="188" r="52" fill="url(#bkGold)" filter="url(#bokeh-blur)">
+      <animate attributeName="cx" values="205;252;172;225;205" dur="19s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="682" cy="55" r="38" fill="url(#bk2)" filter="url(#bokeh-sm)">
+      <animate attributeName="cx" values="682;718;655;698;682" dur="14s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="55;84;38;68;55" dur="11s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="472" cy="150" r="52" fill="url(#bkGold)" filter="url(#bokeh-sm)">
+      <animate attributeName="cy" values="150;122;168;140;150" dur="16s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- ============ 星尘（14） ============ -->
+    <circle cx="172" cy="22" r="1.2" fill="#C4A8D4" opacity="0.45"><animate attributeName="opacity" values="0.45;0.05;0.45" dur="2.8s" repeatCount="indefinite"/></circle>
+    <circle cx="498" cy="206" r="0.9" fill="#6CCB4C" opacity="0.35"><animate attributeName="opacity" values="0.35;0;0.35" dur="3.5s" repeatCount="indefinite"/></circle>
+    <circle cx="806" cy="76" r="1.4" fill="#E06676" opacity="0.4"><animate attributeName="opacity" values="0.4;0.05;0.4" dur="2.2s" repeatCount="indefinite"/></circle>
+    <circle cx="362" cy="212" r="0.8" fill="#9A7BB0" opacity="0.35"><animate attributeName="opacity" values="0.35;0;0.35" dur="3.2s" repeatCount="indefinite"/></circle>
+    <circle cx="642" cy="18" r="1.1" fill="#C9A96E" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="4s" repeatCount="indefinite"/></circle>
+    <circle cx="128" cy="132" r="1" fill="#C4A8D4" opacity="0.35"><animate attributeName="opacity" values="0.35;0.05;0.35" dur="2.5s" repeatCount="indefinite"/></circle>
+    <circle cx="742" cy="212" r="1.2" fill="#6CCB4C" opacity="0.25"><animate attributeName="opacity" values="0.25;0;0.25" dur="3.8s" repeatCount="indefinite"/></circle>
+    <circle cx="292" cy="14" r="0.7" fill="#E06676" opacity="0.35"><animate attributeName="opacity" values="0.35;0;0.35" dur="4.2s" repeatCount="indefinite"/></circle>
+    <circle cx="552" cy="52" r="0.8" fill="#C4A8D4" opacity="0.3"><animate attributeName="opacity" values="0.3;0.05;0.3" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="78" cy="48" r="0.6" fill="#C9A96E" opacity="0.25"><animate attributeName="opacity" values="0.25;0;0.25" dur="3.6s" repeatCount="indefinite"/></circle>
+    <circle cx="818" cy="158" r="0.9" fill="#9A7BB0" opacity="0.3"><animate attributeName="opacity" values="0.3;0;0.3" dur="2.7s" repeatCount="indefinite"/></circle>
+    <circle cx="448" cy="190" r="0.7" fill="#6CCB4C" opacity="0.25"><animate attributeName="opacity" values="0.25;0;0.25" dur="4.5s" repeatCount="indefinite"/></circle>
+    <circle cx="228" cy="86" r="0.65" fill="#7CD9E8" opacity="0.28"><animate attributeName="opacity" values="0.28;0;0.28" dur="3.9s" repeatCount="indefinite"/></circle>
+    <circle cx="886" cy="104" r="0.75" fill="#7CD9E8" opacity="0.22"><animate attributeName="opacity" values="0.22;0;0.22" dur="4.4s" repeatCount="indefinite"/></circle>
+
+    <!-- ============ 扫描线 ============ -->
+    <g opacity="0.02">
+      <line x1="0" y1="0" x2="900" y2="0" stroke="#C4A8D4" stroke-width="0.6">
+        <animate attributeName="y1" values="0;220" dur="7s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="0;220" dur="7s" repeatCount="indefinite"/>
+      </line>
+      <line x1="900" y1="110" x2="0" y2="110" stroke="#9A3242" stroke-width="0.4">
+        <animate attributeName="y1" values="220;0" dur="9s" repeatCount="indefinite"/>
+        <animate attributeName="y2" values="220;0" dur="9s" repeatCount="indefinite"/>
+      </line>
+    </g>
+
+    <!-- ============ 花簇装饰 ============ -->
+    <g transform="translate(38,208) scale(0.3)" opacity="0.12" filter="url(#glow-soft)">
+      <animate attributeName="opacity" values="0.12;0.18;0.12" dur="7s" repeatCount="indefinite"/>
+      <g><use href="#floretCluster"/><circle r="5" fill="#9A3242" opacity="0.5"/>
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="40s" repeatCount="indefinite"/>
+      </g>
+    </g>
+    <g transform="translate(868,22) scale(0.2)" opacity="0.1" filter="url(#glow-soft)">
+      <animate attributeName="opacity" values="0.1;0.15;0.1" dur="9s" repeatCount="indefinite"/>
+      <g><use href="#floretCluster"/><circle r="4" fill="#9A3242" opacity="0.4"/>
+        <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="50s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- ================================================================ -->
+    <!-- 4-SLIDE CAROUSEL · 24s cycle · 5s visible · 1s cross-fade          -->
+    <!-- ================================================================ -->
+
+    <!-- SLIDE 1 · BRAND (0–5.5s) -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.229;0.271;0.979;1" dur="24s" repeatCount="indefinite"/>
+      <text x="470" y="72" text-anchor="middle" font-family="'Courier New',monospace" font-size="52" font-weight="bold" fill="url(#titleGrad)" filter="url(#glow-strong)">HOS</text>
+      <text x="470" y="97" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#B49BC4" letter-spacing="7" opacity="0.9">HYACINTH OF SECURITY</text>
+      <rect x="380" y="107" width="180" height="1" rx="0.5" fill="url(#sepGrad)"/>
+      <text x="470" y="133" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#C4A8D4" opacity="0.85">AI × Cybersecurity Practitioner</text>
+      <text x="470" y="158" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#8A8781">Qian Jiahong · Shanghai, China</text>
+      <rect x="546" y="147" width="7" height="15" rx="1" fill="#9A3242" opacity="0.7"><animate attributeName="opacity" values="0.9;0;0.9" dur="1.2s" repeatCount="indefinite"/></rect>
+      <g transform="translate(470,196) scale(0.26)" opacity="0.1" filter="url(#glow-soft)">
+        <use href="#floretCluster"/>
+        <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="60s" repeatCount="indefinite" additive="sum"/>
+      </g>
+    </g>
+
+    <!-- SLIDE 2 · DATA BOARD (5.5–11.5s) ：5 项统计 + 迷你趋势条 -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.229;0.271;0.458;0.5;1" dur="24s" repeatCount="indefinite"/>
+      <text x="470" y="34" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#B49BC4" letter-spacing="7" opacity="0.6">LIVE DATA BOARD</text>
+      <rect x="415" y="42" width="110" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
+
+      <!-- 上排 4 卡 -->
+      <g>
+        <rect x="82"  y="54" width="170" height="64" rx="9" fill="#9A3242" fill-opacity="0.05" stroke="#E06676" stroke-opacity="0.14" stroke-width="0.6"/>
+        <rect x="282" y="54" width="170" height="64" rx="9" fill="#9A7BB0" fill-opacity="0.05" stroke="#C4A8D4" stroke-opacity="0.14" stroke-width="0.6"/>
+        <rect x="482" y="54" width="170" height="64" rx="9" fill="#3E8A2C" fill-opacity="0.04" stroke="#8DF06A" stroke-opacity="0.12" stroke-width="0.6"/>
+        <rect x="682" y="54" width="136" height="64" rx="9" fill="#96763F" fill-opacity="0.04" stroke="#EBC690" stroke-opacity="0.12" stroke-width="0.6"/>
+
+        <text id="stat-prs" x="167" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">509</text>
+        <text x="167" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">merged PRs</text>
+
+        <text id="stat-repos" x="367" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numPurple)" filter="url(#glow)">63</text>
+        <text x="367" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">repositories</text>
+
+        <text id="stat-stars" x="567" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGreen)" filter="url(#glow)">68</text>
+        <text x="567" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">total stars</text>
+
+        <text id="stat-followers" x="750" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numGold)" filter="url(#glow)">37</text>
+        <text x="750" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">followers</text>
+
+        <!-- 迷你趋势条（静态比例示意，Actions 可注入 width） -->
+        <g opacity="0.55">
+          <rect x="92"  y="141" width="240" height="3.5" rx="1.75" fill="#3A3640"/>
+          <rect x="92"  y="141" width="170" height="3.5" rx="1.75" fill="url(#barRed)"/>
+          <rect x="92"  y="149" width="240" height="3.5" rx="1.75" fill="#3A3640"/>
+          <rect x="92"  y="149" width="70"  height="3.5" rx="1.75" fill="url(#barPurple)"/>
+          <rect x="92"  y="157" width="240" height="3.5" rx="1.75" fill="#3A3640"/>
+          <rect x="92"  y="157" width="56"  height="3.5" rx="1.75" fill="url(#barGreen)"/>
+          <rect x="92"  y="165" width="240" height="3.5" rx="1.75" fill="#3A3640"/>
+          <rect x="92"  y="165" width="34"  height="3.5" rx="1.75" fill="url(#barGold)"/>
+          <rect x="92"  y="173" width="240" height="3.5" rx="1.75" fill="#3A3640"/>
+          <rect x="92"  y="173" width="110" height="3.5" rx="1.75" fill="url(#barCyan)"/>
+        </g>
+        <g font-family="'Courier New',monospace" font-size="7" fill="#6A6660" opacity="0.75">
+          <text x="342" y="145" text-anchor="end">214</text>
+          <text x="342" y="153" text-anchor="end">34</text>
+          <text x="342" y="161" text-anchor="end">70</text>
+          <text x="342" y="169" text-anchor="end">40</text>
+          <text x="342" y="177" text-anchor="end">1007</text>
+        </g>
+        <text id="stat-commits" x="360" y="177" font-family="'Courier New',monospace" font-size="0.1" fill="#7CD9E8" opacity="0.01">3711</text>
+      </g>
+
+      <text x="470" y="200" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9.5" fill="#6A6660" opacity="0.8">annual commits <tspan fill="#7CD9E8">1,007</tspan> · 7 PyPI packages · 1,467 articles</text>
+      <text x="470" y="213" text-anchor="middle" font-family="'Courier New',monospace" font-size="7.5" fill="#4A4A4A">auto-refreshed daily via GitHub Actions</text>
+    </g>
+
+    <!-- SLIDE 3 · FLAGSHIP (11.5–17.5s) -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.458;0.5;0.687;0.729;1" dur="24s" repeatCount="indefinite"/>
+      <text x="470" y="34" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#E06676" letter-spacing="7" opacity="0.6">FLAGSHIP PROJECT</text>
+      <rect x="385" y="42" width="170" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
+
+      <rect x="82" y="52" width="736" height="110" rx="11" fill="#9A7BB0" fill-opacity="0.045" stroke="#B49BC4" stroke-opacity="0.12" stroke-width="0.6"/>
+
+      <g transform="translate(98,64) scale(0.09)" opacity="0.07" filter="url(#glow)"><use href="#floret" fill="url(#petalPurple)"/></g>
+      <g transform="translate(802,152) scale(0.09) rotate(180)" opacity="0.07" filter="url(#glow)"><use href="#floret" fill="url(#petalCrimson)"/></g>
+
+      <text x="470" y="82" text-anchor="middle" font-family="system-ui,sans-serif" font-size="26" font-weight="bold" fill="url(#titleGrad)" filter="url(#glow)">HOS-LS</text>
+      <text x="470" y="104" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#C4A8D4" opacity="0.7">AI-driven Code Security Analysis &amp; Attack Chain Reasoning</text>
+
+      <g text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5">
+        <rect x="100" y="118" width="158" height="28" rx="6" fill="#E06676" fill-opacity="0.06" stroke="#E06676" stroke-opacity="0.14" stroke-width="0.4"/>
+        <text x="179" y="136" fill="#E4707F" opacity="0.9">AI Semantic Analysis</text>
+        <rect x="274" y="118" width="158" height="28" rx="6" fill="#9A7BB0" fill-opacity="0.06" stroke="#9A7BB0" stroke-opacity="0.14" stroke-width="0.4"/>
+        <text x="353" y="136" fill="#C4A8D4" opacity="0.9">Attack Chain Engine</text>
+        <rect x="448" y="118" width="158" height="28" rx="6" fill="#3E8A2C" fill-opacity="0.05" stroke="#8DF06A" stroke-opacity="0.12" stroke-width="0.4"/>
+        <text x="527" y="136" fill="#8DF06A" opacity="0.85">Multi-Agent Arch</text>
+        <rect x="622" y="118" width="158" height="28" rx="6" fill="#96763F" fill-opacity="0.05" stroke="#EBC690" stroke-opacity="0.12" stroke-width="0.4"/>
+        <text x="701" y="136" fill="#EBC690" opacity="0.85">Exploit Generation</text>
+      </g>
+
+      <text x="470" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#6A6660" opacity="0.5">Beyond Regex · End-to-end Attack Path Reasoning · Deterministic Verification</text>
+      <text x="470" y="186" text-anchor="middle" font-family="'Courier New',monospace" font-size="8" fill="#9A7BB0" opacity="0.6">github.com/lxcxjxhx/HOS-LS</text>
+    </g>
+
+    <!-- SLIDE 4 · HIGHLIGHTS & CONTACT (17.5–24s) -->
+    <g opacity="0">
+      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.687;0.729;0.979;1" dur="24s" repeatCount="indefinite"/>
+      <text x="470" y="34" text-anchor="middle" font-family="'Courier New',monospace" font-size="9" fill="#EBC690" letter-spacing="7" opacity="0.6">HIGHLIGHTS &amp; CONTACT</text>
+      <rect x="400" y="42" width="140" height="0.8" rx="0.4" fill="url(#sepGrad)" opacity="0.35"/>
+
+      <rect x="88" y="54" width="234" height="52" rx="8" fill="#96763F" fill-opacity="0.04" stroke="#EBC690" stroke-opacity="0.1" stroke-width="0.5"/>
+      <rect x="340" y="54" width="220" height="52" rx="8" fill="#9A7BB0" fill-opacity="0.04" stroke="#C4A8D4" stroke-opacity="0.1" stroke-width="0.5"/>
+      <rect x="578" y="54" width="234" height="52" rx="8" fill="#3E8A2C" fill-opacity="0.035" stroke="#8DF06A" stroke-opacity="0.09" stroke-width="0.5"/>
+
+      <g text-anchor="middle">
+        <text x="205" y="76" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#EBC690">中美创客大赛特等奖</text>
+        <text x="205" y="93" font-family="system-ui,sans-serif" font-size="8" fill="#8A8781">China-US Maker · Top Award</text>
+      </g>
+      <g text-anchor="middle">
+        <text x="450" y="76" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#C4A8D4">CSDN 专家博主</text>
+        <text x="450" y="93" font-family="system-ui,sans-serif" font-size="8" fill="#8A8781">1,467 articles · 1.2M+ views</text>
+      </g>
+      <g text-anchor="middle">
+        <text x="695" y="76" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#8DF06A">Intel AI Competition</text>
+        <text x="695" y="93" font-family="system-ui,sans-serif" font-size="8" fill="#8A8781">AI + Threat Detection</text>
+      </g>
+
+      <text x="470" y="126" text-anchor="middle" font-family="system-ui,sans-serif" font-size="8.5" fill="#6A6660" opacity="0.55">Aliyun Expert · Huawei Expert · Tencent Star · Security Emergency Response · Neo4j Certified · HF Agent · MCP</text>
+
+      <rect x="290" y="140" width="360" height="0.5" fill="url(#sepGrad)" opacity="0.25"/>
+
+      <rect x="250" y="152" width="440" height="44" rx="8" fill="#C9A96E" fill-opacity="0.035" stroke="#C9A96E" stroke-opacity="0.1" stroke-width="0.5"/>
+      <text x="470" y="171" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#EBC690" opacity="0.9">aqfxz_zh@qq.com</text>
+      <text x="470" y="188" text-anchor="middle" font-family="'Courier New',monospace" font-size="8.5" fill="#96763F" opacity="0.85">github.com/lxcxjxhx · security-hyacinth.blog.csdn.net</text>
+    </g>
+
+    <!-- ============ 进度点 (4) ============ -->
+    <g>
+      <circle cx="433" cy="211" r="2" fill="url(#numPurple)" opacity="0.15">
+        <animate attributeName="opacity" values="0.9;0.9;0.15;0.15;0.9" keyTimes="0;0.229;0.271;0.979;1" dur="24s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="3.5;3.5;2;2;3.5" keyTimes="0;0.229;0.271;0.979;1" dur="24s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="451" cy="211" r="2" fill="url(#numRed)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.15;0.9;0.9;0.15;0.15" keyTimes="0;0.229;0.271;0.458;0.5;1" dur="24s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;2;3.5;3.5;2;2" keyTimes="0;0.229;0.271;0.458;0.5;1" dur="24s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="469" cy="211" r="2" fill="url(#numGreen)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.15;0.9;0.9;0.15;0.15" keyTimes="0;0.458;0.5;0.687;0.729;1" dur="24s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;2;3.5;3.5;2;2" keyTimes="0;0.458;0.5;0.687;0.729;1" dur="24s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="487" cy="211" r="2" fill="url(#numGold)" opacity="0.15">
+        <animate attributeName="opacity" values="0.15;0.15;0.9;0.9;0.15" keyTimes="0;0.687;0.729;0.979;1" dur="24s" repeatCount="indefinite"/>
+        <animate attributeName="r" values="2;2;3.5;3.5;2" keyTimes="0;0.687;0.729;0.979;1" dur="24s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+
+    <!-- ============ 边框与暗角 ============ -->
+    <rect width="900" height="220" fill="url(#vignette)" rx="14" pointer-events="none"/>
+    <rect x="0.5" y="0.5" width="899" height="219" rx="14" fill="none" stroke="#9A7BB0" stroke-width="0.3" opacity="0.14"/>
+    <path d="M0,9 Q0,0 9,0" fill="none" stroke="#9A7BB0" stroke-width="0.4" opacity="0.22"/>
+    <path d="M900,9 Q900,0 891,0" fill="none" stroke="#9A3242" stroke-width="0.4" opacity="0.22"/>
+    <path d="M0,211 Q0,220 9,220" fill="none" stroke="#9A3242" stroke-width="0.4" opacity="0.22"/>
+    <path d="M900,211 Q900,220 891,220" fill="none" stroke="#9A7BB0" stroke-width="0.4" opacity="0.22"/>
+  </g>
+</svg>
