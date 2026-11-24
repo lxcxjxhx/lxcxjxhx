@@ -206,7 +206,7 @@
         <rect x="482" y="54" width="170" height="64" rx="9" fill="#3E8A2C" fill-opacity="0.04" stroke="#8DF06A" stroke-opacity="0.12" stroke-width="0.6"/>
         <rect x="682" y="54" width="136" height="64" rx="9" fill="#96763F" fill-opacity="0.04" stroke="#EBC690" stroke-opacity="0.12" stroke-width="0.6"/>
 
-        <text id="stat-prs" x="167" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">506</text>
+        <text id="stat-prs" x="167" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numRed)" filter="url(#glow)">509</text>
         <text x="167" y="110" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#8A8781">merged PRs</text>
 
         <text id="stat-repos" x="367" y="92" text-anchor="middle" font-family="'Courier New',monospace" font-size="30" font-weight="bold" fill="url(#numPurple)" filter="url(#glow)">63</text>
